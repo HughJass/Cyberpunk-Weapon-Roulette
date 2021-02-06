@@ -1,5 +1,3 @@
--- yeet
--- mystuff
 gunstr = {
     "Items.Preset_Achilles_Default",
     "Items.Preset_Achilles_Military",
@@ -249,20 +247,6 @@ gunstr = {
     "Items.Preset_Zhuo_Trauma"
 }
 
--- RWeps = {
---     pc = nil,
---     ts = nil,
---     ss = nil,
---     ssc = nil,
---     es = nil,
---     im = nil,
---     cs = nil,
-    
---     time = nil,
---     oldwep = nil
--- }
-
-
 registerForEvent("onInit", function ()
     player = Game.GetPlayer()
     ts = Game.GetTransactionSystem()
@@ -376,47 +360,13 @@ function upgradeWeapon()
                 ss:AddSavedModifier(statObj, statCritChance)
                 ss:AddSavedModifier(statObj, statCritDamage)
                 ss:AddSavedModifier(statObj, statHeadshot)
-
-                if rarityModifier == "Random" then
-                    local r = math.random(#randomList)
-                    rarityModifier = randomList[r]
-                        if rarityModifier == "Legendary" then
-                            Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Legendary'))
-                            rarityModifier = "Random"
-                        end
-                        if rarityModifier == "Epic" then
-                            Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Epic'))
-                            rarityModifier = "Random"
-                        end
-                        if rarityModifier == "Rare" then
-                            Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Rare'))
-                            rarityModifier = "Random"
-                        end
-                        if rarityModifier == "Uncommon" then
-                            Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Uncommon'))
-                            rarityModifier = "Random"
-                        end
-                        if rarityModifier == "Common" then
-                            Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Common'))
-                            rarityModifier = "Random"
-                        end
-                end
-
-                if rarityModifier == "Legendary" then
-                    Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Legendary'))
-                end
-                if rarityModifier == "Epic" then
-                    Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Epic'))
-                end
-                if rarityModifier == "Rare" then
-                    Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Rare'))
-                end
-                if rarityModifier == "Uncommon" then
-                    Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Uncommon'))
-                end
-                if rarityModifier == "Common" then
-                    Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new('Common'))
-                end
+                            
+		local rarity = rarityList[rarityModifier+1]
+		if rarityModifier == 5 then
+			local rnd = math.random(5)
+			rarity = rarityList[rnd]
+		end
+		Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
             end
         end
     end
@@ -548,14 +498,6 @@ rarityList = {
     "Uncommon",
     "Common",
     "Random"
-}
-
-randomList = {
-    'Legendary',
-    'Epic',
-    'Rare',
-    'Uncommon',
-    'Common'
 }
 
 --, true, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoBackground

@@ -1,0 +1,132 @@
+[2021-02-06 16:44:50 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:45:00 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:45:10 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:46:19 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:46:45 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:46:55 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:05 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:05 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:15 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:15 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:25 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:25 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:35 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:35 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:45 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:45 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 16:47:55 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:434: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:499: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:439>
+[2021-02-06 17:30:09 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:503: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:443>
+[2021-02-06 17:30:14 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:503: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:443>
+[2021-02-06 17:30:14 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:503: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:443>
+[2021-02-06 17:31:55 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:503: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:443>
+[2021-02-06 17:32:00 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:503: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:443>
+[2021-02-06 17:32:05 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:438: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:503: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:443>
+[2021-02-06 17:38:18 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:18 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:23 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:28 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:33 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:33 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:38 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:43 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:48 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
+[2021-02-06 17:38:53 UTC+01:00] [error] ...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: attempt to index a nil value (local 'itemdata')
+stack traceback:
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:384: in global 'removeQuest'
+	...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:449: in function <...er_engine_tweaks\mods\Cyberpunk-Weapon-Roulette\init.lua:389>
