@@ -596,3 +596,7 @@ registerForEvent("onDraw", function ()
 
 
 end)
+
+registerForEvent("onShutdown", function()
+    initiatedMod = false
+end)
