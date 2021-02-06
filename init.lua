@@ -508,7 +508,9 @@ registerForEvent("onDraw", function ()
                 end
                 if initiatedMod == true then
                     ImGui.PushStyleColor(ImGuiCol.Button, 1, 0, 0, 1)
-                    ImGui.Button("W E A P O N  R O U L E T T E  A C T I V E", elements.button.width.single, elements.button.height)
+                    if (ImGui.Button("W E A P O N  R O U L E T T E  A C T I V E", elements.button.width.single, elements.button.height)) then
+                        initiatedMod = false
+                    end
                     ImGui.PopStyleColor()
                 end
 
