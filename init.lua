@@ -73,8 +73,6 @@ gunstr = {
     "Items.Preset_Grad_Neon",
     "Items.Preset_Grad_Panam",
     "Items.Preset_Grad_Pimp",
-    "Items.Preset_Grenade_Biohazard_Default",
-    "Items.Preset_Grenade_Flash_Default",
     "Items.Preset_Hammer_Default",
     "Items.Preset_Hammer_Sasquatch",
     "Items.Preset_HMG_Default",
@@ -340,9 +338,9 @@ function upgradeWeapon()
                 ss:RemoveAllModifiers(statObj, 'CritDamage', true)
                 ss:RemoveAllModifiers(statObj, 'HeadshotDamageMultiplier', true)
                 local statPLevel = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('ItemLevel', 'Additive', playerPLValue * 15)
-                local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 50 * (playerLValue / 50))
-                local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 100 * (playerLValue / 50))
-                local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 2.5 * (playerLValue / 50))
+                local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 40 * (playerLValue / 50))
+                local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 80 * (playerLValue / 50))
+                local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 1.5 * (playerLValue / 50))
                 ss:AddSavedModifier(statObj, statPLevel)
                 ss:AddSavedModifier(statObj, statCritChance)
                 ss:AddSavedModifier(statObj, statCritDamage)
@@ -564,7 +562,7 @@ registerForEvent("onDraw", function ()
                     ImGui.Separator()
                 end
 
-
+--[[
                 if (ImGui.CollapsingHeader("C A T E G O R I E S")) then
                     ImGui.Separator()
                     ImGui.Checkbox("POWER", weaponsPower)
@@ -578,7 +576,7 @@ registerForEvent("onDraw", function ()
                     ImGui.Checkbox("BLADE", weaponsBlade)
                     ImGui.Separator()
                 end
-
+--]]
                 ImGui.Separator()
                 if (ImGui.Button("U P D A T E##Timer Change", -1, elements.button.height)) then
                     interval = intervalModifier
