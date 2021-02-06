@@ -1,3 +1,6 @@
+--SPDX-License-Identifier: GPL-2.0
+--Copyright 2021 Hugh Jass and tommyY
+
 gunstr = {
     "Items.Preset_Achilles_Default",
     "Items.Preset_Achilles_Military",
