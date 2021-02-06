@@ -247,7 +247,7 @@ gunstr = {
     "Items.Preset_Zhuo_Trauma"
 }
 
-registerForEvent("onInit", function ()
+function getSystems()
     player = Game.GetPlayer()
     ts = Game.GetTransactionSystem()
     ss = Game.GetStatsSystem()
@@ -255,10 +255,9 @@ registerForEvent("onInit", function ()
     es = ssc:Get(CName.new("EquipmentSystem"))
     cs = ssc:Get(CName.new("CraftingSystem"))
     espd = es:GetPlayerData(player)
-    
-    currentWeap = es:GetActiveItem(player, "Weapon")
-    weapData = ts:GetItemData(player, currentWeap)
-    
+end
+
+registerForEvent("onInit", function ()
     startTime = 0
     startDay = 0
     startHour = 0
@@ -305,14 +304,6 @@ registerForEvent("onInit", function ()
 
 end)
 
-
-function activeWeap()
-    cw = es:GetActiveItem(player, "Weapon")
-    wd = ts:GetItemData(player, cw)
-    oldWeap = wd:GetID()
-    return(oldWeap)
-end
-
 function removeWeap()
     local currentWeapon = espd:GetActiveWeapon()
     ts:RemoveItem(player, currentWeapon, 1)
@@ -321,19 +312,12 @@ end
 
 function giveWeap()
     espd:ClearAllWeaponSlots()
-    r = math.random(#gunstr)
-    w = gunstr[r]
+    local r = math.random(#gunstr)
+    local w = gunstr[r]
     Game.EquipItemToHand(w)
 end
 
 function upgradeWeapon()
-    local player = Game.GetPlayer()
-    local ssc = Game.GetScriptableSystemsContainer()
-    local ts = Game.GetTransactionSystem()
-    local ss = Game.GetStatsSystem()
-    local es = ssc:Get(CName.new('EquipmentSystem'))
-
-    local espd = es:GetPlayerData(player)
     espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
     local playerLValue = ss:GetStatValue(player:GetEntityID(), 'Level')
     local playerPLValue = ss:GetStatValue(player:GetEntityID(), 'PowerLevel')
@@ -361,23 +345,18 @@ function upgradeWeapon()
                 ss:AddSavedModifier(statObj, statCritDamage)
                 ss:AddSavedModifier(statObj, statHeadshot)
                             
-		local rarity = rarityList[rarityModifier+1]
-		if rarityModifier == 5 then
-			local rnd = math.random(5)
-			rarity = rarityList[rnd]
-		end
-		Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
+        local rarity = rarityList[rarityModifier+1]
+        if rarityModifier == 5 then
+            local rnd = math.random(5)
+            rarity = rarityList[rnd]
+        end
+        Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
             end
         end
     end
 end
 
 function removeQuest()
-    local player = Game.GetPlayer()
-    local ssc = Game.GetScriptableSystemsContainer()
-    local ts = Game.GetTransactionSystem()
-    local es = ssc:Get(CName.new('EquipmentSystem'))
-    local espd = es:GetPlayerData(player)
     local currentWeapon = espd:GetActiveWeapon()
     local itemdata = ts:GetItemData(player, currentWeapon)
     
@@ -387,17 +366,17 @@ function removeQuest()
 end
 
 registerForEvent("onUpdate", function (timeDelta)
-    
-    -- Combat status check
-    if initiatedMod == true then
-        startCombat = player:IsInCombat()
-        isDead = player:IsDead()
+    if initiatedMod == false then
+        return
     end
+    getSystems()
+    startCombat = player:IsInCombat()
+    isDead = player:IsDead()
 
     if initiatedMod == true and isDead then
-    	initiatedMod = false
-    	startMod = false
-    	startTimer = false
+        initiatedMod = false
+        startMod = false
+        startTimer = false
     end
 
     if firstGunSpawned == true then
@@ -513,22 +492,22 @@ registerForEvent("onDraw", function ()
                 ImGui.SetWindowSize(elements.tabsize.x, elements.tabsize.y.general)
                 ImGui.PushStyleColor(ImGuiCol.Text, 1, 1, 1, 1)
                 ImGui.Spacing()
-            	if initiatedMod == false then
-	                if (ImGui.Button("S T A R T", elements.button.width.single, elements.button.height)) then
-	                    initiatedMod = true
-	                    Game.GetPlayer():SetWarningMessage("RANDOMIZED WEAPON PROTOCL INITIATED")
-	                    Game.UnequipItem('Weapon', '0')
-	                    Game.UnequipItem('Weapon', '1')
-	                    Game.UnequipItem('Weapon', '2')
-	                    Game.EquipItemToHand(gunstr[firstGun])
-	                    firstGunSpawned = true
-	                end
-	            end
-            	if initiatedMod == true then
-            		ImGui.PushStyleColor(ImGuiCol.Button, 1, 0, 0, 1)
-	                ImGui.Button("W E A P O N  R O U L E T T E  A C T I V E", elements.button.width.single, elements.button.height)
-					ImGui.PopStyleColor()
-	            end
+                if initiatedMod == false then
+                    if (ImGui.Button("S T A R T", elements.button.width.single, elements.button.height)) then
+                        initiatedMod = true
+                        Game.GetPlayer():SetWarningMessage("RANDOMIZED WEAPON PROTOCL INITIATED")
+                        Game.UnequipItem('Weapon', '0')
+                        Game.UnequipItem('Weapon', '1')
+                        Game.UnequipItem('Weapon', '2')
+                        Game.EquipItemToHand(gunstr[firstGun])
+                        firstGunSpawned = true
+                    end
+                end
+                if initiatedMod == true then
+                    ImGui.PushStyleColor(ImGuiCol.Button, 1, 0, 0, 1)
+                    ImGui.Button("W E A P O N  R O U L E T T E  A C T I V E", elements.button.width.single, elements.button.height)
+                    ImGui.PopStyleColor()
+                end
 
                 ImGui.Separator()
 
