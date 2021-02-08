@@ -321,7 +321,7 @@ registerForEvent("onInit", function ()
     }
     listCreated = false
 
-    rarityModifier = "Random"
+    rarityModifier = 5
     raritySelection = 1
 
     
@@ -387,10 +387,13 @@ end
 function removeQuest()
     local currentWeapon = espd:GetActiveWeapon()
     local itemdata = ts:GetItemData(player, currentWeapon)
-    
+    if itemdata == nil then
+        return false
+    end
     if itemdata:HasTag("Quest") then
         itemdata:RemoveDynamicTag("Quest")
     end
+    return true
 end
 
 registerForEvent("onUpdate", function (timeDelta)
@@ -474,13 +477,14 @@ registerForEvent("onUpdate", function (timeDelta)
 
     -- Giving weapon triggers gaveWeapon, signaling to upgrade active weapon
     if initiatedMod == true and startCombat == true and gaveWeapon == true then
-        removeQuest()
-        upgradeWeapon()
-        Game.AddToInventory("Ammo.RifleAmmo",700);
-        Game.AddToInventory("Ammo.ShotgunAmmo",100);
-        Game.AddToInventory("Ammo.SniperRifleAmmo",100);
-        Game.AddToInventory("Ammo.HandgunAmmo",500);
-        gaveWeapon = false
+        if removeQuest() == true then
+            upgradeWeapon()
+            Game.AddToInventory("Ammo.RifleAmmo",700);
+            Game.AddToInventory("Ammo.ShotgunAmmo",100);
+            Game.AddToInventory("Ammo.SniperRifleAmmo",100);
+            Game.AddToInventory("Ammo.HandgunAmmo",500);
+            gaveWeapon = false
+	end
     end
 
 end)
