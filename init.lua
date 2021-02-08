@@ -1,252 +1,262 @@
 --SPDX-License-Identifier: GPL-2.0
 --Copyright 2021 Hugh Jass and tommyY
 
-gunstr = {
-    "Items.Preset_Achilles_Default",
-    "Items.Preset_Achilles_Military",
-    "Items.Preset_Achilles_Nash",
-    "Items.Preset_Achilles_Neon",
-    "Items.Preset_Achilles_Pimp",
-    "Items.Preset_Achilles_Tiny_Mike",
-    "Items.Preset_Ajax_Default",
-    "Items.Preset_Ajax_Military",
-    "Items.Preset_Ajax_Moron",
-    "Items.Preset_Ajax_Neon",
-    "Items.Preset_Ajax_Pimp",
-    "Items.Preset_Ajax_Training",
-    "Items.Preset_Ashura_Default",
-    "Items.Preset_Ashura_Military",
-    "Items.Preset_Ashura_Neon",
-    "Items.Preset_Ashura_Pimp",
-    "Items.Preset_Base_Copperhead",
-    "Items.Preset_Base_Lexington",
-    "Items.Preset_Base_Masamune",
-    "Items.Preset_Baseball_Bat_Default",
-    "Items.Preset_Baseball_Bat_Denny",
-    "Items.Preset_Baton_Alpha",
-    "Items.Preset_Baton_Beta",
-    "Items.Preset_Baton_Gamma",
-    "Items.Preset_Baton_Tinker_Bell",
-    "Items.Preset_Burya_Comrade",
-    "Items.Preset_Burya_Default",
-    "Items.Preset_Burya_Military",
-    "Items.Preset_Burya_Neon",
-    "Items.Preset_Burya_Pimp",
-    "Items.Preset_Butchers_Knife_Default",
-    "Items.Preset_Cane_Fingers",
-    "Items.Preset_Carnage_Default",
-    "Items.Preset_Carnage_Military",
-    "Items.Preset_Carnage_Mox",
-    "Items.Preset_Carnage_Neon",
-    "Items.Preset_Carnage_Pimp",
-    "Items.Preset_Cattle_Prod_Tinker_Bell",
-    "Items.Preset_Chao_Default",
-    "Items.Preset_Chao_Military",
-    "Items.Preset_Chao_Neon",
-    "Items.Preset_Chao_Pimp",
-    "Items.Preset_Chefs_Knife_Default",
-    "Items.Preset_Copperhead_Default",
-    "Items.Preset_Copperhead_Genesis",
-    "Items.Preset_Copperhead_Military",
-    "Items.Preset_Copperhead_Neon",
-    "Items.Preset_Copperhead_Pimp",
-    "Items.Preset_Crowbar_Default",
-    "Items.Preset_Crusher_Default",
-    "Items.Preset_Crusher_Military",
-    "Items.Preset_Crusher_Neon",
-    "Items.Preset_Crusher_Pimp",
-    "Items.Preset_Defender_Default",
-    "Items.Preset_Defender_Military",
-    "Items.Preset_Defender_Neon",
-    "Items.Preset_Defender_Pimp",
-    "Items.Preset_Dian_Default",
-    "Items.Preset_Dian_Default",
-    "Items.Preset_Dian_Military",
-    "Items.Preset_Dian_Neon",
-    "Items.Preset_Dian_Pimp",
-    "Items.Preset_Dian_Trauma",
-    "Items.Preset_Dian_Yinglong",
-    "Items.Preset_Dildo_Stout",
-    "Items.Preset_Grad_Buck",
-    "Items.Preset_Grad_Default",
-    "Items.Preset_Grad_Military",
-    "Items.Preset_Grad_Neon",
-    "Items.Preset_Grad_Panam",
-    "Items.Preset_Grad_Pimp",
-    "Items.Preset_Hammer_Default",
-    "Items.Preset_Hammer_Sasquatch",
-    "Items.Preset_HMG_Default",
-    "Items.Preset_Igla_Default",
-    "Items.Preset_Igla_Military",
-    "Items.Preset_Igla_Neon",
-    "Items.Preset_Igla_Pimp",
-    "Items.Preset_Igla_Sovereign",
-    "Items.Preset_Iron_Pipe_Default",
-    "Items.Preset_Kanabo_Default",
-    "Items.Preset_Katana_Arasaka_2020",
-    "Items.Preset_Katana_Cocktail",
-    "Items.Preset_Katana_Default",
-    "Items.Preset_Katana_GoG",
-    "Items.Preset_Katana_Hiromi",
-    "Items.Preset_Katana_Military",
-    "Items.Preset_Katana_Neon",
-    "Items.Preset_Katana_Saburo",
-    "Items.Preset_Katana_Surgeon",
-    "Items.Preset_Katana_Takemura",
-    "Items.Preset_Katana_Training",
-    "Items.Preset_Kenshin_Default",
-    "Items.Preset_Kenshin_Frank",
-    "Items.Preset_Kenshin_Military",
-    "Items.Preset_Kenshin_MQ041",
-    "Items.Preset_Kenshin_Neon",
-    "Items.Preset_Kenshin_Pimp",
-    "Items.Preset_Kenshin_Royce",
-    "Items.Preset_Kenshin_Takemura",
-    "Items.Preset_Knife_Default",
-    "Items.Preset_Knife_Military",
-    "Items.Preset_Knife_Stinger",
-    "Items.Preset_Knuckles_Default",
-    "Items.Preset_Knuckles_Golden",
-    "Items.Preset_Knuckles_Military",
-    "Items.Preset_Knuckles_Pimp",
-    "Items.Preset_Kukri_Default",
-    "Items.Preset_Kukri_Voodoo",
-    "Items.Preset_Lexington_DEBUG",
-    "Items.Preset_Lexington_Default",
-    "Items.Preset_Lexington_Military",
-    "Items.Preset_Lexington_Neon",
-    "Items.Preset_Lexington_Pimp",
-    "Items.Preset_Lexington_Toygun",
-    "Items.Preset_Lexington_Wilson",
-    "Items.Preset_Liberty_Default",
-    "Items.Preset_Liberty_Dex",
-    "Items.Preset_Liberty_Military",
-    "Items.Preset_Liberty_Neon",
-    "Items.Preset_Liberty_Pimp",
-    "Items.Preset_Liberty_Rogue",
-    "Items.Preset_Liberty_Yorinobu",
-    "Items.Preset_Machete_Default",
-    "Items.Preset_Machete_Maelstrom",
-    "Items.Preset_Machete_Valentinos",
-    "Items.Preset_Masamune_Arasaka_2020",
-    "Items.Preset_Masamune_Default",
-    "Items.Preset_Masamune_Flashlight",
-    "Items.Preset_Masamune_Military",
-    "Items.Preset_Masamune_Neon",
-    "Items.Preset_Masamune_Pimp",
-    "Items.Preset_Masamune_Rogue",
-    "Items.Preset_Masamune_Scope",
-    "Items.Preset_Masamune_Trauma",
-    "Items.Preset_MQ008_Nova",
-    "Items.Preset_Nekomata_Breakthrough",
-    "Items.Preset_Nekomata_Default",
-    "Items.Preset_Nekomata_Military",
-    "Items.Preset_Nekomata_Neon",
-    "Items.Preset_Nekomata_Pimp",
-    "Items.Preset_Nova_Default",
-    "Items.Preset_Nova_Doom_Doom",
-    "Items.Preset_Nova_Military",
-    "Items.Preset_Nova_Neon",
-    "Items.Preset_Nova_Pimp",
-    "Items.Preset_Nova_Q000_Nomad",
-    "Items.Preset_Nue_Arasaka",
-    "Items.Preset_Nue_Arasaka_2020",
-    "Items.Preset_Nue_Default",
-    "Items.Preset_Nue_Jackie",
-    "Items.Preset_Nue_Jackie",
-    "Items.Preset_Nue_Maiko",
-    "Items.Preset_Nue_Military",
-    "Items.Preset_Nue_Neon",
-    "Items.Preset_Nue_Pimp",
-    "Items.Preset_Omaha_Default",
-    "Items.Preset_Omaha_Military",
-    "Items.Preset_Omaha_Neon",
-    "Items.Preset_Omaha_Pimp",
-    "Items.Preset_Omaha_Suzie",
-    "Items.Preset_Overture_Cassidy",
-    "Items.Preset_Overture_Default",
-    "Items.Preset_Overture_Default_E",
-    "Items.Preset_Overture_Default_L",
-    "Items.Preset_Overture_Default_R",
-    "Items.Preset_Overture_Default_U",
-    "Items.Preset_Overture_Kerry",
-    "Items.Preset_Overture_Legendary",
-    "Items.Preset_Overture_Military",
-    "Items.Preset_Overture_Neon",
-    "Items.Preset_Overture_Pimp",
-    "Items.Preset_Overture_River",
-    "Items.Preset_Palica_Default",
-    "Items.Preset_Palica_Military",
-    "Items.Preset_Palica_Neon",
-    "Items.Preset_Palica_Pimp",
-    "Items.Preset_Pipe_Wrench_Default",
-    "Items.Preset_Pulsar_Buzzsaw",
-    "Items.Preset_Pulsar_Default",
-    "Items.Preset_Pulsar_Military",
-    "Items.Preset_Pulsar_Neon",
-    "Items.Preset_Pulsar_Pimp",
-    "Items.Preset_Q001_Lexington",
-    "Items.Preset_Quasar_Default",
-    "Items.Preset_Quasar_Military",
-    "Items.Preset_Quasar_Neon",
-    "Items.Preset_Quasar_Pimp",
-    "Items.Preset_Saratoga_Arasaka_2020",
-    "Items.Preset_Saratoga_Default",
-    "Items.Preset_Saratoga_Maelstrom",
-    "Items.Preset_Saratoga_Military",
-    "Items.Preset_Saratoga_Neon",
-    "Items.Preset_Saratoga_Pimp",
-    "Items.Preset_Saratoga_Raffen",
-    "Items.Preset_Satara_Default",
-    "Items.Preset_Satara_Military",
-    "Items.Preset_Satara_Neon",
-    "Items.Preset_Satara_Pimp",
-    "Items.Preset_Shingen_Default",
-    "Items.Preset_Shingen_Military",
-    "Items.Preset_Shingen_Neon",
-    "Items.Preset_Shingen_Pimp",
-    "Items.Preset_Shingen_Prototype",
-    "Items.Preset_Shovel_Caretaker",
-    "Items.Preset_Sidewinder_Default",
-    "Items.Preset_Sidewinder_Divided",
-    "Items.Preset_Sidewinder_Military",
-    "Items.Preset_Sidewinder_Neon",
-    "Items.Preset_Sidewinder_Pimp",
-    "Items.Preset_Silverhand_3516",
-    "Items.Preset_Sor22_Default",
-    "Items.Preset_Sor22_Military",
-    "Items.Preset_Sor22_Neon",
-    "Items.Preset_Sor22_Pimp",
-    "Items.Preset_Tactician_Default",
-    "Items.Preset_Tactician_Headsman",
-    "Items.Preset_Tactician_Military",
-    "Items.Preset_Tactician_Neon",
-    "Items.Preset_Tactician_Pimp",
-    "Items.Preset_Tanto_Default",
-    "Items.Preset_Testera_Default",
-    "Items.Preset_Testera_Neon",
-    "Items.Preset_Testera_Pimp",
-    "Items.Preset_Tire_Iron_Default",
-    "Items.Preset_Tomahawk_Default",
-    "Items.Preset_Unity_Default",
-    "Items.Preset_Unity_Military",
-    "Items.Preset_Unity_Neon",
-    "Items.Preset_Unity_Pimp",
-    "Items.Preset_V_Unity",
-    "Items.Preset_V_Unity_Cutscene",
-    "Items.Preset_Yukimura_Default",
-    "Items.Preset_Yukimura_Kiji",
-    "Items.Preset_Yukimura_Military",
-    "Items.Preset_Yukimura_Neon",
-    "Items.Preset_Yukimura_Pimp",
-    "Items.Preset_Yukimura_Skippy",
-    "Items.Preset_Zhuo_Default",
-    "Items.Preset_Zhuo_Eight_Star",
-    "Items.Preset_Zhuo_Military",
-    "Items.Preset_Zhuo_Neon",
-    "Items.Preset_Zhuo_Pimp",
-    "Items.Preset_Zhuo_Trauma"
+gunTypes = {
+	[1] = {
+		"Items.Preset_Butchers_Knife_Default",
+		"Items.Preset_Chefs_Knife_Default",
+		"Items.Preset_Katana_Arasaka_2020",
+		"Items.Preset_Katana_Cocktail",
+		"Items.Preset_Katana_Default",
+		"Items.Preset_Katana_GoG",
+		"Items.Preset_Katana_Hiromi",
+		"Items.Preset_Katana_Military",
+		"Items.Preset_Katana_Neon",
+		"Items.Preset_Katana_Saburo",
+		"Items.Preset_Katana_Surgeon",
+		"Items.Preset_Katana_Takemura",
+		"Items.Preset_Katana_Training",
+		"Items.Preset_Knife_Default",
+		"Items.Preset_Knife_Military",
+		"Items.Preset_Knife_Stinger",
+		"Items.Preset_Kukri_Default",
+		"Items.Preset_Kukri_Voodoo",
+		"Items.Preset_Machete_Default",
+		"Items.Preset_Machete_Maelstrom",
+		"Items.Preset_Machete_Valentinos",
+		"Items.Preset_Tanto_Default"
+	},
+	[2] = {
+		"Items.Preset_Baseball_Bat_Default",
+		"Items.Preset_Baseball_Bat_Denny",
+		"Items.Preset_Baton_Alpha",
+		"Items.Preset_Baton_Beta",
+		"Items.Preset_Baton_Gamma",
+		"Items.Preset_Baton_Tinker_Bell",
+		"Items.Preset_Cane_Fingers",
+		"Items.Preset_Crowbar_Default",
+		"Items.Preset_Dildo_Stout",
+		"Items.Preset_Hammer_Default",
+		"Items.Preset_Hammer_Sasquatch",
+		"Items.Preset_Iron_Pipe_Default",
+		"Items.Preset_Kanabo_Default",
+		"Items.Preset_Knuckles_Default",
+		"Items.Preset_Knuckles_Golden",
+		"Items.Preset_Knuckles_Military",
+		"Items.Preset_Knuckles_Pimp",
+		"Items.Preset_Pipe_Wrench_Default",
+		"Items.Preset_Shovel_Caretaker",
+		"Items.Preset_Tire_Iron_Default",
+		"Items.Preset_Tomahawk_Default"
+	},
+	[3] = {
+		"Items.Preset_Ajax_Default",
+		"Items.Preset_Ajax_Military",
+		"Items.Preset_Ajax_Moron",
+		"Items.Preset_Ajax_Neon",
+		"Items.Preset_Ajax_Pimp",
+		"Items.Preset_Ajax_Training",
+		"Items.Preset_Base_Copperhead",
+		"Items.Preset_Base_Lexington",
+		"Items.Preset_Base_Masamune",
+		"Items.Preset_Carnage_Default",
+		"Items.Preset_Carnage_Military",
+		"Items.Preset_Carnage_Mox",
+		"Items.Preset_Carnage_Neon",
+		"Items.Preset_Carnage_Pimp",
+		"Items.Preset_Copperhead_Default",
+		"Items.Preset_Copperhead_Genesis",
+		"Items.Preset_Copperhead_Military",
+		"Items.Preset_Copperhead_Neon",
+		"Items.Preset_Copperhead_Pimp",
+		"Items.Preset_Crusher_Default",
+		"Items.Preset_Crusher_Military",
+		"Items.Preset_Crusher_Neon",
+		"Items.Preset_Crusher_Pimp",
+		"Items.Preset_Defender_Default",
+		"Items.Preset_Defender_Military",
+		"Items.Preset_Defender_Neon",
+		"Items.Preset_Defender_Pimp",
+		"Items.Preset_Grad_Buck",
+		"Items.Preset_Grad_Default",
+		"Items.Preset_Grad_Military",
+		"Items.Preset_Grad_Neon",
+		"Items.Preset_Grad_Panam",
+		"Items.Preset_Grad_Pimp",
+		"Items.Preset_HMG_Default",
+		"Items.Preset_Igla_Default",
+		"Items.Preset_Igla_Military",
+		"Items.Preset_Igla_Neon",
+		"Items.Preset_Igla_Pimp",
+		"Items.Preset_Igla_Sovereign",
+		"Items.Preset_Lexington_DEBUG",
+		"Items.Preset_Lexington_Default",
+		"Items.Preset_Lexington_Military",
+		"Items.Preset_Lexington_Neon",
+		"Items.Preset_Lexington_Pimp",
+		"Items.Preset_Lexington_Toygun",
+		"Items.Preset_Lexington_Wilson",
+		"Items.Preset_Liberty_Default",
+		"Items.Preset_Liberty_Dex",
+		"Items.Preset_Liberty_Military",
+		"Items.Preset_Liberty_Neon",
+		"Items.Preset_Liberty_Pimp",
+		"Items.Preset_Liberty_Rogue",
+		"Items.Preset_Liberty_Yorinobu",
+		"Items.Preset_Masamune_Arasaka_2020",
+		"Items.Preset_Masamune_Default",
+		"Items.Preset_Masamune_Flashlight",
+		"Items.Preset_Masamune_Military",
+		"Items.Preset_Masamune_Neon",
+		"Items.Preset_Masamune_Pimp",
+		"Items.Preset_Masamune_Rogue",
+		"Items.Preset_Masamune_Scope",
+		"Items.Preset_Masamune_Trauma",
+		"Items.Preset_MQ008_Nova",
+		"Items.Preset_Nova_Default",
+		"Items.Preset_Nova_Doom_Doom",
+		"Items.Preset_Nova_Military",
+		"Items.Preset_Nova_Neon",
+		"Items.Preset_Nova_Pimp",
+		"Items.Preset_Nova_Q000_Nomad",
+		"Items.Preset_Nue_Arasaka",
+		"Items.Preset_Nue_Arasaka_2020",
+		"Items.Preset_Nue_Default",
+		"Items.Preset_Nue_Jackie",
+		"Items.Preset_Nue_Jackie",
+		"Items.Preset_Nue_Maiko",
+		"Items.Preset_Nue_Military",
+		"Items.Preset_Nue_Neon",
+		"Items.Preset_Nue_Pimp",
+		"Items.Preset_Overture_Cassidy",
+		"Items.Preset_Overture_Default",
+		"Items.Preset_Overture_Default_E",
+		"Items.Preset_Overture_Default_L",
+		"Items.Preset_Overture_Default_R",
+		"Items.Preset_Overture_Default_U",
+		"Items.Preset_Overture_Kerry",
+		"Items.Preset_Overture_Legendary",
+		"Items.Preset_Overture_Military",
+		"Items.Preset_Overture_Neon",
+		"Items.Preset_Overture_Pimp",
+		"Items.Preset_Overture_River",
+		"Items.Preset_Pulsar_Buzzsaw",
+		"Items.Preset_Pulsar_Default",
+		"Items.Preset_Pulsar_Military",
+		"Items.Preset_Pulsar_Neon",
+		"Items.Preset_Pulsar_Pimp",
+		"Items.Preset_Q001_Lexington",
+		"Items.Preset_Saratoga_Arasaka_2020",
+		"Items.Preset_Saratoga_Default",
+		"Items.Preset_Saratoga_Maelstrom",
+		"Items.Preset_Saratoga_Military",
+		"Items.Preset_Saratoga_Neon",
+		"Items.Preset_Saratoga_Pimp",
+		"Items.Preset_Saratoga_Raffen",
+		"Items.Preset_Silverhand_3516",
+		"Items.Preset_Sor22_Default",
+		"Items.Preset_Sor22_Military",
+		"Items.Preset_Sor22_Neon",
+		"Items.Preset_Sor22_Pimp",
+		"Items.Preset_Tactician_Default",
+		"Items.Preset_Tactician_Headsman",
+		"Items.Preset_Tactician_Military",
+		"Items.Preset_Tactician_Neon",
+		"Items.Preset_Tactician_Pimp",
+		"Items.Preset_Testera_Default",
+		"Items.Preset_Testera_Neon",
+		"Items.Preset_Testera_Pimp",
+		"Items.Preset_Unity_Default",
+		"Items.Preset_Unity_Military",
+		"Items.Preset_Unity_Neon",
+		"Items.Preset_Unity_Pimp",
+		"Items.Preset_V_Unity"
+	},
+	[4] = {
+		"Items.Preset_Ashura_Default",
+		"Items.Preset_Ashura_Military",
+		"Items.Preset_Ashura_Neon",
+		"Items.Preset_Ashura_Pimp",
+		"Items.Preset_Chao_Default",
+		"Items.Preset_Chao_Military",
+		"Items.Preset_Chao_Neon",
+		"Items.Preset_Chao_Pimp",
+		"Items.Preset_Dian_Default",
+		"Items.Preset_Dian_Default",
+		"Items.Preset_Dian_Military",
+		"Items.Preset_Dian_Neon",
+		"Items.Preset_Dian_Pimp",
+		"Items.Preset_Dian_Trauma",
+		"Items.Preset_Dian_Yinglong",
+		"Items.Preset_Palica_Default",
+		"Items.Preset_Palica_Military",
+		"Items.Preset_Palica_Neon",
+		"Items.Preset_Palica_Pimp",
+		"Items.Preset_Shingen_Default",
+		"Items.Preset_Shingen_Military",
+		"Items.Preset_Shingen_Neon",
+		"Items.Preset_Shingen_Pimp",
+		"Items.Preset_Shingen_Prototype",
+		"Items.Preset_Sidewinder_Default",
+		"Items.Preset_Sidewinder_Divided",
+		"Items.Preset_Sidewinder_Military",
+		"Items.Preset_Sidewinder_Neon",
+		"Items.Preset_Sidewinder_Pimp",
+		"Items.Preset_Yukimura_Default",
+		"Items.Preset_Yukimura_Kiji",
+		"Items.Preset_Yukimura_Military",
+		"Items.Preset_Yukimura_Neon",
+		"Items.Preset_Yukimura_Pimp",
+		"Items.Preset_Yukimura_Skippy",
+		"Items.Preset_Zhuo_Default",
+		"Items.Preset_Zhuo_Eight_Star",
+		"Items.Preset_Zhuo_Military",
+		"Items.Preset_Zhuo_Neon",
+		"Items.Preset_Zhuo_Pimp",
+		"Items.Preset_Zhuo_Traum"
+	},
+	[5] = {
+		"Items.Preset_Achilles_Default",
+		"Items.Preset_Achilles_Military",
+		"Items.Preset_Achilles_Nash",
+		"Items.Preset_Achilles_Neon",
+		"Items.Preset_Achilles_Pimp",
+		"Items.Preset_Achilles_Tiny_Mike",
+		"Items.Preset_Burya_Comrade",
+		"Items.Preset_Burya_Default",
+		"Items.Preset_Burya_Military",
+		"Items.Preset_Burya_Neon",
+		"Items.Preset_Burya_Pimp",
+		"Items.Preset_Kenshin_Default",
+		"Items.Preset_Kenshin_Frank",
+		"Items.Preset_Kenshin_Military",
+		"Items.Preset_Kenshin_MQ041",
+		"Items.Preset_Kenshin_Neon",
+		"Items.Preset_Kenshin_Pimp",
+		"Items.Preset_Kenshin_Royce",
+		"Items.Preset_Kenshin_Takemura",
+		"Items.Preset_Nekomata_Breakthrough",
+		"Items.Preset_Nekomata_Default",
+		"Items.Preset_Nekomata_Military",
+		"Items.Preset_Nekomata_Neon",
+		"Items.Preset_Nekomata_Pimp",
+		"Items.Preset_Omaha_Default",
+		"Items.Preset_Omaha_Military",
+		"Items.Preset_Omaha_Neon",
+		"Items.Preset_Omaha_Pimp",
+		"Items.Preset_Omaha_Suzie",
+		"Items.Preset_Quasar_Default",
+		"Items.Preset_Quasar_Military",
+		"Items.Preset_Quasar_Neon",
+		"Items.Preset_Quasar_Pimp",
+		"Items.Preset_Satara_Default",
+		"Items.Preset_Satara_Military",
+		"Items.Preset_Satara_Neon",
+		"Items.Preset_Satara_Pimp"
+	}
 }
+
+gunList = {}
 
 function getSystems()
     player = Game.GetPlayer()
@@ -291,17 +301,34 @@ registerForEvent("onInit", function ()
     wHeight = 0
     qa_tracker = 0
 
+	checkedBlade = 1
+	checkedBlunt = 1
+	checkedPower = 1
+	checkedSmart = 1
+	checkedTech = 1
+
     weaponsPower = true
     weaponsTech = true
     weaponsSmart = true
     weaponsBlunt = true
     weaponsBlade = true
+    weaponsActivated = {
+    	weaponsBlade,
+    	weaponsBlunt,
+    	weaponsPower,
+    	weaponsSmart,
+    	weaponsTech
+    }
+    listCreated = false
 
     rarityModifier = "Random"
     raritySelection = 1
 
-    firstGun = math.random(#gunstr)
+    
     firstGunSpawned = false
+
+    tuningModifier = 80
+    tuningSettings = 0
 
 end)
 
@@ -313,8 +340,8 @@ end
 
 function giveWeap()
     espd:ClearAllWeaponSlots()
-    local r = math.random(#gunstr)
-    local w = gunstr[r]
+    local r = math.random(#gunList)
+    local w = gunList[r]
     Game.EquipItemToHand(w)
 end
 
@@ -337,10 +364,10 @@ function upgradeWeapon()
                 ss:RemoveAllModifiers(statObj, 'CritChance', true)
                 ss:RemoveAllModifiers(statObj, 'CritDamage', true)
                 ss:RemoveAllModifiers(statObj, 'HeadshotDamageMultiplier', true)
-                local statPLevel = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('ItemLevel', 'Additive', playerPLValue * 15)
-                local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 40 * (playerLValue / 50))
-                local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 80 * (playerLValue / 50))
-                local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 1.5 * (playerLValue / 50))
+                local statPLevel = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('ItemLevel', 'Additive', playerPLValue * 10 * (tuningModifier / 100))
+                local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 35 * (playerLValue / 50) * (tuningModifier / 100))
+                local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 75 * (playerLValue / 50) * (tuningModifier / 100))
+                local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 1.5 * (playerLValue / 50) * (tuningModifier / 100))
                 ss:AddSavedModifier(statObj, statPLevel)
                 ss:AddSavedModifier(statObj, statCritChance)
                 ss:AddSavedModifier(statObj, statCritDamage)
@@ -380,10 +407,31 @@ registerForEvent("onUpdate", function (timeDelta)
         startTimer = false
     end
 
+    if initiatedMod == true and listCreated == false then
+    	gunList = {}
+    	for i = 1, #weaponsActivated do
+    		if weaponsActivated[i] then
+    			for _, v in ipairs(gunTypes[i]) do
+    				table.insert(gunList, v)
+    			end
+    		end
+    	end
+    	print(#gunList)
+        listCreated = true
+    end
+
+    if initiatedMod == true and listCreated == true and firstGunSpawned == false then
+    	local firstGun = math.random(#gunList) 
+        Game.UnequipItem('Weapon', '0')
+        Game.UnequipItem('Weapon', '1')
+        Game.UnequipItem('Weapon', '2')
+        Game.EquipItemToHand(gunList[firstGun])
+        firstGunSpawned = true
+    end
+
     if firstGunSpawned == true then
         upgradeWeapon()
         removeQuest()
-        firstGunSpawned = false
     end
 
     if initiatedMod == true and startMod == false then
@@ -435,11 +483,6 @@ registerForEvent("onUpdate", function (timeDelta)
         gaveWeapon = false
     end
 
-    -- Ignore
-    if initiatedMod == true and qa_tracker == (Time + 1) then
-        print("OldWeap: " .. tostring(oldWeap))
-        qa_tracker = qa_tracker + 1
-    end
 end)
 
 local elements = {
@@ -497,39 +540,30 @@ registerForEvent("onDraw", function ()
                     if (ImGui.Button("S T A R T", elements.button.width.single, elements.button.height)) then
                         initiatedMod = true
                         Game.GetPlayer():SetWarningMessage("RANDOMIZED WEAPON PROTOCL INITIATED")
-                        Game.UnequipItem('Weapon', '0')
-                        Game.UnequipItem('Weapon', '1')
-                        Game.UnequipItem('Weapon', '2')
-                        Game.EquipItemToHand(gunstr[firstGun])
-                        firstGunSpawned = true
                     end
                 end
                 if initiatedMod == true then
-                    ImGui.PushStyleColor(ImGuiCol.Button, 1, 0, 0, 1)
-                    if (ImGui.Button("W E A P O N  R O U L E T T E  A C T I V E", elements.button.width.single, elements.button.height)) then
+                    ImGui.PushStyleColor(ImGuiCol.Button, 0.9, 0.4, 0.4, 1)
+                    ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.75, 0.33, 0.34, 0.7)
+                    ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.86, 0.44, 0.44, 0.7)
+                    if (ImGui.Button("R E S E T", elements.button.width.single, elements.button.height)) then
                         initiatedMod = false
                     end
-                    ImGui.PopStyleColor()
+                    ImGui.PopStyleColor(3)
                 end
 
                 ImGui.Separator()
 
 
                 if (initiatedMod == true and startCombat == true) then
-                    -- ImGui.Text("WEAPON RESET: " .. tostring(timeElapsed) .. " SECONDS  //  COMBAT: ACTIVE")
-                    -- ImGui.Spacing()
                     ImGui.ProgressBar((interval - timeElapsed)/interval, -1, 25)
                 end
 
                 if (initiatedMod == true and startCombat == false) then
-                    -- ImGui.Text("WEAPON RESET: " .. tostring(timeElapsed) .. " SECONDS  //  COMBAT: INACTIVE")
-                    -- ImGui.Spacing()
                     ImGui.ProgressBar(0, -1, 25)
                 end
 
                 if (initiatedMod == false) then
-                    -- ImGui.Text("WEAPON RESET: INACTIVE")
-                    -- ImGui.Spacing()
                     ImGui.ProgressBar(0, -1, 25)
                 end
                 ImGui.PopStyleColor()
@@ -540,9 +574,20 @@ registerForEvent("onDraw", function ()
                 wWidth, wHeight = GetDisplayResolution()
                 ImGui.SetWindowSize(elements.tabsize.x, elements.tabsize.y.general)
                 ImGui.SetWindowFontScale(1)
-                ImGui.PushStyleColor(ImGuiCol.Text, 1, 1, 1, 1)
 
                 ImGui.Spacing()
+
+            	if (ImGui.CollapsingHeader("T U N I N G")) then
+                    ImGui.Separator()
+                    ImGui.PushItemWidth(-1)
+					tuningSettings = ImGui.SliderInt("Difficulty", tuningSettings, 1, 100)
+                    if (ImGui.IsItemHovered()) then
+                        ImGui.SetTooltip("Lower values increase difficulty. Default 80")
+                    end
+                    ImGui.Separator()
+                end
+
+
                 if (ImGui.CollapsingHeader("T I M E R")) then
                     ImGui.Separator()
                     ImGui.PushItemWidth(150)
@@ -562,29 +607,53 @@ registerForEvent("onDraw", function ()
                     ImGui.Separator()
                 end
 
---[[
+
                 if (ImGui.CollapsingHeader("C A T E G O R I E S")) then
                     ImGui.Separator()
-                    ImGui.Checkbox("POWER", weaponsPower)
+                    
+                    _, checkedPower = ImGui.Checkbox("POWER", weaponsPower)
+                    if checkedPower then
+                    	weaponsPower = not weaponsPower
+                    end
                     ImGui.SameLine()
-                    ImGui.Checkbox("TECH", weaponsSmart)
+                    _, checkedTech = ImGui.Checkbox("TECH", weaponsTech)
+                    if checkedTech then
+                    	weaponsTech = not weaponsTech
+                    end
                     ImGui.SameLine()
-                    ImGui.Checkbox("SMART", weaponsSmart)
-                    ImGui.Spacing()
-                    ImGui.Checkbox("BLUNT", weaponsBlunt)
+                    _, checkedSmart = ImGui.Checkbox("SMART", weaponsSmart)
+                    if checkedSmart then
+                    	weaponsSmart = not weaponsSmart
+                    end
                     ImGui.SameLine()
-                    ImGui.Checkbox("BLADE", weaponsBlade)
+                    _, checkedBlunt = ImGui.Checkbox("BLUNT", weaponsBlunt)
+                    if checkedBlunt then
+                    	weaponsBlunt = not weaponsBlunt
+                    end
+                    ImGui.SameLine()
+                    _, checkedBlade = ImGui.Checkbox("BLADE", weaponsBlade)
+                    if checkedBlade then
+                    	weaponsBlade = not weaponsBlade
+                    end
                     ImGui.Separator()
                 end
---]]
+
                 ImGui.Separator()
                 if (ImGui.Button("U P D A T E##Timer Change", -1, elements.button.height)) then
                     interval = intervalModifier
                     rarityModifier = raritySelection
+                    tuningModifier = tuningSettings
+                    weaponsActivated = {
+                    	weaponsBlade,
+                    	weaponsBlunt,
+                    	weaponsPower,
+                    	weaponsSmart,
+                    	weaponsTech
+                    }
+                    listCreated = false
                     Game.GetPlayer():SetWarningMessage("SETTINGS UPDATED")
                 end
 
-                ImGui.PopStyleColor()
             ImGui.EndTabItem()
             end
 
