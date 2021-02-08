@@ -571,13 +571,13 @@ registerForEvent("onDraw", function ()
                         ImGui.PushItemWidth(-1)
                         tuningSettings = ImGui.SliderInt("Difficulty", tuningSettings, 1, 100)
                         if (ImGui.IsItemHovered()) then
-                            CPS.CPToolTip1Begin(280, 75)
+                            CPS.CPToolTip2Begin(280, 75)
                             ImGui.Text("Weapon power multiplier as a percent.")
                             ImGui.Spacing()
                             ImGui.Text("Lower values spawn weaker weapons.")
                             ImGui.Spacing()
                             ImGui.Text("Default value: 80")
-                            CPS.CPToolTip1End()
+                            CPS.CPToolTip2End()
                         end
                         ImGui.Separator()
                     end
@@ -586,11 +586,11 @@ registerForEvent("onDraw", function ()
                         ImGui.PushItemWidth(150)
                         intervalModifier = ImGui.InputInt("##Timer Assignment", intervalModifier, 5, 120)
                         if (ImGui.IsItemHovered()) then
-                            CPS.CPToolTip1Begin(280, 50)
+                            CPS.CPToolTip2Begin(280, 50)
                             ImGui.Text("Time between weapon changes in seconds")
                             ImGui.Spacing()
                             ImGui.Text("Default value: 10")
-                            CPS.CPToolTip1End()
+                            CPS.CPToolTip2End()
                         end
                         ImGui.SameLine()
                         ImGui.Text("SECONDS")
@@ -601,11 +601,11 @@ registerForEvent("onDraw", function ()
                         ImGui.PushItemWidth(150)
                         raritySelection = ImGui.Combo("##Rarity", raritySelection, rarityList, #rarityList)
                         if (ImGui.IsItemHovered()) then
-                            CPS.CPToolTip1Begin(315, 50)
+                            CPS.CPToolTip2Begin(315, 50)
                             ImGui.Text("Set a fixed rarity for weapons to spawn as.")
                             ImGui.Spacing()
                             ImGui.Text("Default value: Random")
-                            CPS.CPToolTip1End()
+                            CPS.CPToolTip2End()
                         end
                         ImGui.Separator()
                     end
