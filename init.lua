@@ -1,6 +1,11 @@
 --SPDX-License-Identifier: GPL-2.0
 --Copyright 2021 Hugh Jass and tommyY
 
+CPS = require ("CPStyling")
+print("CPStyling.lua loaded")
+theme = CPS.theme
+color = CPS.color
+
 gunTypes = {
 	[1] = {
 		"Items.Preset_Butchers_Knife_Default",
@@ -258,6 +263,20 @@ gunTypes = {
 
 gunList = {}
 
+showUI = true
+
+registerHotkey("ToggleUI", "Toggle Weapon Roulette UI", function()
+    showUI = not showUI
+end)
+
+registerForEvent("onOverlayOpen", function()
+    showUI = true
+end)
+
+registerForEvent("onOverlayClose", function()
+    showUI = false
+end)
+
 function getSystems()
     player = Game.GetPlayer()
     ts = Game.GetTransactionSystem()
@@ -334,7 +353,6 @@ end)
 
 function removeWeap()
     local currentWeapon = espd:GetActiveWeapon()
-    print(currentWeapon.id.hash)
     if currentWeapon.id.hash == 0 then
         return false
     end
@@ -433,10 +451,12 @@ registerForEvent("onUpdate", function (timeDelta)
         Game.UnequipItem('Weapon', '1')
         Game.UnequipItem('Weapon', '2')
         Game.EquipItemToHand(gunList[firstGun])
+        firstGunSpawned = true
     end
 
     if initiatedMod == true and startMod == false then
         upgradeWeapon()
+        removeQuest()
         startMod = true
     end
 
@@ -527,146 +547,118 @@ rarityList = {
 --, true, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoBackground
 
 registerForEvent("onDraw", function ()
+    CPS.setThemeBegin()
+    wWidth, wHeight = GetDisplayResolution()
+    ImGui.SetWindowSize(elements.tabsize.x, elements.tabsize.y.general)
 
     if ImGui.Begin("WeaponRoulette", true, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoBackground) then
-        if (ImGui.BeginTabBar("WeaponRoulette")) then
-            wWidth, wHeight = GetDisplayResolution()
-            if (ImGui.BeginTabItem("STATS")) then
+        ImGui.SetWindowFontScale(1)
 
+        if initiatedMod == false then
+            if (ImGui.BeginTabBar("WeaponRoulette")) then
                 wWidth, wHeight = GetDisplayResolution()
-                ImGui.SetWindowSize(elements.tabsize.x, elements.tabsize.y.general)
-                ImGui.PushStyleColor(ImGuiCol.Text, 1, 1, 1, 1)
-                ImGui.Spacing()
-                if initiatedMod == false then
+                if (ImGui.BeginTabItem("STATS")) then
+                    ImGui.Spacing()
                     if (ImGui.Button("S T A R T", elements.button.width.single, elements.button.height)) then
                         initiatedMod = true
                         Game.GetPlayer():SetWarningMessage("RANDOMIZED WEAPON PROTOCL INITIATED")
                     end
-                end
-                if initiatedMod == true then
-                    ImGui.PushStyleColor(ImGuiCol.Button, 0.9, 0.4, 0.4, 1)
-                    ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.75, 0.33, 0.34, 0.7)
-                    ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.86, 0.44, 0.44, 0.7)
-                    if (ImGui.Button("R E S E T", elements.button.width.single, elements.button.height)) then
-                        initiatedMod = false
-                    end
-                    ImGui.PopStyleColor(3)
-                end
-
-                ImGui.Separator()
-
-
-                if (initiatedMod == true and startCombat == true) then
-                    ImGui.ProgressBar((interval - timeElapsed)/interval, -1, 25)
-                end
-
-                if (initiatedMod == true and startCombat == false) then
+                    ImGui.Separator()
                     ImGui.ProgressBar(0, -1, 25)
+                ImGui.EndTabItem()
                 end
 
-                if (initiatedMod == false) then
-                    ImGui.ProgressBar(0, -1, 25)
+                if (ImGui.BeginTabItem("SETTINGS")) then
+                    if (ImGui.CollapsingHeader("T U N I N G")) then
+                        ImGui.Separator()
+                        ImGui.PushItemWidth(-1)
+                        tuningSettings = ImGui.SliderInt("Difficulty", tuningSettings, 1, 100)
+                        if (ImGui.IsItemHovered()) then
+                            ImGui.SetTooltip("Lower values increase difficulty. Default 80")
+                        end
+                        ImGui.Separator()
+                    end
+                    if (ImGui.CollapsingHeader("T I M E R")) then
+                        ImGui.Separator()
+                        ImGui.PushItemWidth(150)
+                        intervalModifier = ImGui.InputInt("##Timer Assignment", intervalModifier, 5, 2400)
+                        ImGui.SameLine()
+                        ImGui.Text("SECONDS")
+                        ImGui.Separator()
+                    end
+                    if (ImGui.CollapsingHeader("R A R I T Y")) then
+                        ImGui.Separator()
+                        ImGui.PushItemWidth(150)
+                        raritySelection = ImGui.Combo("##Rarity", raritySelection, rarityList, #rarityList)
+                        ImGui.Separator()
+                    end
+                    if (ImGui.CollapsingHeader("C A T E G O R I E S")) then
+                        ImGui.Separator()
+                        _, checkedPower = ImGui.Checkbox("POWER", weaponsPower)
+                        if checkedPower then
+                            weaponsPower = not weaponsPower
+                        end
+                        ImGui.SameLine()
+                        _, checkedTech = ImGui.Checkbox("TECH", weaponsTech)
+                        if checkedTech then
+                            weaponsTech = not weaponsTech
+                        end
+                        ImGui.SameLine()
+                        _, checkedSmart = ImGui.Checkbox("SMART", weaponsSmart)
+                        if checkedSmart then
+                            weaponsSmart = not weaponsSmart
+                        end
+                        ImGui.SameLine()
+                        _, checkedBlunt = ImGui.Checkbox("BLUNT", weaponsBlunt)
+                        if checkedBlunt then
+                            weaponsBlunt = not weaponsBlunt
+                        end
+                        ImGui.SameLine()
+                        _, checkedBlade = ImGui.Checkbox("BLADE", weaponsBlade)
+                        if checkedBlade then
+                            weaponsBlade = not weaponsBlade
+                        end
+                        ImGui.Separator()
+                    end
+                    ImGui.Separator()
+                    if (ImGui.Button("U P D A T E##Timer Change", -1, elements.button.height)) then
+                        interval = intervalModifier
+                        rarityModifier = raritySelection
+                        tuningModifier = tuningSettings
+                        weaponsActivated = {
+                            weaponsBlade,
+                            weaponsBlunt,
+                            weaponsPower,
+                            weaponsSmart,
+                            weaponsTech
+                        }
+                        fillWeaponList()
+                        Game.GetPlayer():SetWarningMessage("SETTINGS UPDATED")
+                    end
+                ImGui.EndTabItem()
                 end
-                ImGui.PopStyleColor()
-            ImGui.EndTabItem()
+            ImGui.EndTabBar()
             end
-
-            if (ImGui.BeginTabItem("SETTINGS")) then
-                wWidth, wHeight = GetDisplayResolution()
-                ImGui.SetWindowSize(elements.tabsize.x, elements.tabsize.y.general)
-                ImGui.SetWindowFontScale(1)
-
-                ImGui.Spacing()
-
-            	if (ImGui.CollapsingHeader("T U N I N G")) then
-                    ImGui.Separator()
-                    ImGui.PushItemWidth(-1)
-					tuningSettings = ImGui.SliderInt("Difficulty", tuningSettings, 1, 100)
-                    if (ImGui.IsItemHovered()) then
-                        ImGui.SetTooltip("Lower values increase difficulty. Default 80")
-                    end
-                    ImGui.Separator()
-                end
-
-
-                if (ImGui.CollapsingHeader("T I M E R")) then
-                    ImGui.Separator()
-                    ImGui.PushItemWidth(150)
-                    intervalModifier = ImGui.InputInt("##Timer Assignment", intervalModifier, 5, 2400)
-                    ImGui.SameLine()
-                    ImGui.Text("SECONDS")
-                    ImGui.Separator()
-                end
-
-
-                if (ImGui.CollapsingHeader("R A R I T Y")) then
-                    ImGui.Separator()
-                    -- ImGui.Text("S E L E C T _ G U N _ R A R I T Y ")
-                    -- ImGui.SameLine()
-                    ImGui.PushItemWidth(150)
-                    raritySelection = ImGui.Combo("##Rarity", raritySelection, rarityList, #rarityList)
-                    ImGui.Separator()
-                end
-
-
-                if (ImGui.CollapsingHeader("C A T E G O R I E S")) then
-                    ImGui.Separator()
-                    
-                    _, checkedPower = ImGui.Checkbox("POWER", weaponsPower)
-                    if checkedPower then
-                    	weaponsPower = not weaponsPower
-                    end
-                    ImGui.SameLine()
-                    _, checkedTech = ImGui.Checkbox("TECH", weaponsTech)
-                    if checkedTech then
-                    	weaponsTech = not weaponsTech
-                    end
-                    ImGui.SameLine()
-                    _, checkedSmart = ImGui.Checkbox("SMART", weaponsSmart)
-                    if checkedSmart then
-                    	weaponsSmart = not weaponsSmart
-                    end
-                    ImGui.SameLine()
-                    _, checkedBlunt = ImGui.Checkbox("BLUNT", weaponsBlunt)
-                    if checkedBlunt then
-                    	weaponsBlunt = not weaponsBlunt
-                    end
-                    ImGui.SameLine()
-                    _, checkedBlade = ImGui.Checkbox("BLADE", weaponsBlade)
-                    if checkedBlade then
-                    	weaponsBlade = not weaponsBlade
-                    end
-                    ImGui.Separator()
-                end
-
-                ImGui.Separator()
-                if (ImGui.Button("U P D A T E##Timer Change", -1, elements.button.height)) then
-                    interval = intervalModifier
-                    rarityModifier = raritySelection
-                    tuningModifier = tuningSettings
-                    weaponsActivated = {
-                    	weaponsBlade,
-                    	weaponsBlunt,
-                    	weaponsPower,
-                    	weaponsSmart,
-                    	weaponsTech
-                    }
-                    fillWeaponList()
-                    Game.GetPlayer():SetWarningMessage("SETTINGS UPDATED")
-                end
-
-            ImGui.EndTabItem()
+        end
+        
+        if initiatedMod == true then
+            if (ImGui.Button("R E S E T", elements.button.width.single, elements.button.height)) then
+                initiatedMod = false
             end
-
-        ImGui.EndTabBar()
-        end 
-
+            ImGui.Separator()
+            if startCombat == true then
+                ImGui.ProgressBar((interval - timeElapsed)/interval, -1, 25)
+            end
+            if startCombat == false then
+                ImGui.ProgressBar(0, -1, 25)
+            end
+        end
     ImGui.End()
     end
-
-
+    CPS.setThemeEnd()
 end)
 
 registerForEvent("onShutdown", function()
     initiatedMod = false
 end)
+
