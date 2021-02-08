@@ -329,7 +329,7 @@ registerForEvent("onInit", function ()
 
     tuningModifier = 80
     tuningSettings = 0
-
+    fillWeaponList()
 end)
 
 function removeWeap()
@@ -401,6 +401,18 @@ function removeQuest()
     return true
 end
 
+function fillWeaponList()
+    gunList = {}
+    for i = 1, #weaponsActivated do
+        if weaponsActivated[i] then
+            for _, v in ipairs(gunTypes[i]) do
+                table.insert(gunList, v)
+            end
+        end
+    end
+    print(#gunList)
+end
+
 registerForEvent("onUpdate", function (timeDelta)
     if initiatedMod == false then
         return
@@ -415,31 +427,12 @@ registerForEvent("onUpdate", function (timeDelta)
         startTimer = false
     end
 
-    if initiatedMod == true and listCreated == false then
-    	gunList = {}
-    	for i = 1, #weaponsActivated do
-    		if weaponsActivated[i] then
-    			for _, v in ipairs(gunTypes[i]) do
-    				table.insert(gunList, v)
-    			end
-    		end
-    	end
-    	print(#gunList)
-        listCreated = true
-    end
-
-    if initiatedMod == true and listCreated == true and firstGunSpawned == false then
+    if initiatedMod == true and firstGunSpawned == false then
     	local firstGun = math.random(#gunList) 
         Game.UnequipItem('Weapon', '0')
         Game.UnequipItem('Weapon', '1')
         Game.UnequipItem('Weapon', '2')
         Game.EquipItemToHand(gunList[firstGun])
-        firstGunSpawned = true
-    end
-
-    if firstGunSpawned == true then
-        upgradeWeapon()
-        removeQuest()
     end
 
     if initiatedMod == true and startMod == false then
@@ -658,7 +651,7 @@ registerForEvent("onDraw", function ()
                     	weaponsSmart,
                     	weaponsTech
                     }
-                    listCreated = false
+                    fillWeaponList()
                     Game.GetPlayer():SetWarningMessage("SETTINGS UPDATED")
                 end
 
