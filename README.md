@@ -14,9 +14,9 @@ How to use:
    - Timer: The number of seconds between randomized guns being assigned as the active weapon. Default is set to 30 seconds.  
    - Rarity: Specify the rarity to be forcefully applied to every gun that spawns. Random is a selectable and the default option.  
    - Gun Types: Specify the type of weapons to include in the pool (Power, Tech, Smart, Blunt, Blade). Default set to all weapon types.  
-   - Click update. Without updating, all of the default settings will be applied on start.  
-2. Under the stats page, click START and the mod will begin by assigning a first weapon.  
-3. The random spawning is only initiated while in combat, and the timer for when a new weapon will spawn is represented as a progress bar in the stats tab.  
+2. Click update. Without updating, all of the default settings will be applied on start.  
+3. Under the stats page, click START and the mod will begin by assigning a first weapon.  
+4. The randomizing process is only initiated while in combat, and the timer for when a new weapon will spawn is represented as a progress bar in the stats tab.  
   
 Known issues:  
 1. Inconsistent results when starting the mod without reloading it after death.  
