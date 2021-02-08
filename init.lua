@@ -93,7 +93,6 @@ gunTypes = {
 		"Items.Preset_Igla_Neon",
 		"Items.Preset_Igla_Pimp",
 		"Items.Preset_Igla_Sovereign",
-		"Items.Preset_Lexington_DEBUG",
 		"Items.Preset_Lexington_Default",
 		"Items.Preset_Lexington_Military",
 		"Items.Preset_Lexington_Neon",
@@ -114,19 +113,15 @@ gunTypes = {
 		"Items.Preset_Masamune_Neon",
 		"Items.Preset_Masamune_Pimp",
 		"Items.Preset_Masamune_Rogue",
-		"Items.Preset_Masamune_Scope",
 		"Items.Preset_Masamune_Trauma",
-		"Items.Preset_MQ008_Nova",
 		"Items.Preset_Nova_Default",
 		"Items.Preset_Nova_Doom_Doom",
 		"Items.Preset_Nova_Military",
 		"Items.Preset_Nova_Neon",
 		"Items.Preset_Nova_Pimp",
 		"Items.Preset_Nova_Q000_Nomad",
-		"Items.Preset_Nue_Arasaka",
 		"Items.Preset_Nue_Arasaka_2020",
 		"Items.Preset_Nue_Default",
-		"Items.Preset_Nue_Jackie",
 		"Items.Preset_Nue_Jackie",
 		"Items.Preset_Nue_Maiko",
 		"Items.Preset_Nue_Military",
@@ -217,7 +212,6 @@ gunTypes = {
 		"Items.Preset_Zhuo_Military",
 		"Items.Preset_Zhuo_Neon",
 		"Items.Preset_Zhuo_Pimp",
-		"Items.Preset_Zhuo_Traum"
 	},
 	[5] = {
 		"Items.Preset_Achilles_Default",
@@ -259,6 +253,7 @@ gunTypes = {
 		"Items.Preset_Satara_Pimp"
 	}
 }
+
 
 gunList = {}
 
@@ -348,6 +343,10 @@ registerForEvent("onInit", function ()
     tuningModifier = 80
     tuningSettings = 0
     fillWeaponList()
+
+    i = 1
+    test = 0
+
 end)
 
 function removeWeap()
@@ -442,6 +441,7 @@ registerForEvent("onUpdate", function (timeDelta)
         initiatedMod = false
         startMod = false
         startTimer = false
+        firstGunSpawned = false
     end
 
     if initiatedMod == true and firstGunSpawned == false then
@@ -670,6 +670,9 @@ registerForEvent("onDraw", function ()
             CPS.setFrameThemeBegin()
             if (CPS.CPButton("R E S E T", elements.button.width.single, elements.button.height)) then
                 initiatedMod = false
+                startMod = false
+                startTimer = false
+                firstGunSpawned = false
             end
             if startCombat == true then
                 ImGui.ProgressBar((interval - timeElapsed)/interval, 335, 30)
