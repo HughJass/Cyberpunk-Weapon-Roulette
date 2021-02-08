@@ -19,9 +19,8 @@ How to use:
 4. The randomizing process is only initiated while in combat, and the timer for when a new weapon will spawn is represented as a progress bar in the stats tab.  
   
 Known issues:  
-1. Inconsistent results when starting the mod without reloading it after death.  
-2. Quest guns sometimes do not get assigned as the active weapon, leaving you with bare fists until the progress bar finishes loading and a new gun is assigned.  
-3. Attachments/Mods currently unavailable. Can't seem to work around the game crashing when trying to equip any mods with a function.  
-4. Eventually would like to minimize the UI's visibility while active so it's less intrusive.  
-5. Will also make the UI overlay something you can toggle.  
-6. The stats on the guns are hardcoded integers and scale with your level. Eventually we want it all to be customizable and also reflect actual stats from normally upgraded weapons of the relevant types (Example: Headshot multipliers never get that high on Shotguns, but the hardcoding forces it to take on values that you would typically see on Rifles).
+1. Quest guns sometimes do not get assigned as the active weapon, leaving you with bare fists until the progress bar finishes loading and a new gun is assigned.  
+2. Attachments/Mods currently unavailable. Can't seem to work around the game crashing when trying to equip any mods with a function.  
+3. Eventually would like to minimize the UI's visibility while active so it's less intrusive.  
+4. Will also make the UI overlay something you can toggle.  
+5. The stats on the guns are hardcoded integers and scale with your level. Eventually we want it all to be customizable and also reflect actual stats from normally upgraded weapons of the relevant types (Example: Headshot multipliers never get that high on Shotguns, but the hardcoding forces it to take on values that you would typically see on Rifles).
