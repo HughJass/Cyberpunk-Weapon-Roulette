@@ -88,7 +88,6 @@ gunTypes = {
 		"Items.Preset_Grad_Neon",
 		"Items.Preset_Grad_Panam",
 		"Items.Preset_Grad_Pimp",
-		"Items.Preset_HMG_Default",
 		"Items.Preset_Igla_Default",
 		"Items.Preset_Igla_Military",
 		"Items.Preset_Igla_Neon",
@@ -263,7 +262,7 @@ gunTypes = {
 
 gunList = {}
 
-showUI = true
+showUI = false
 
 registerHotkey("ToggleUI", "Toggle Weapon Roulette UI", function()
     showUI = not showUI
@@ -510,11 +509,11 @@ local elements = {
     tabsize = {
         x = 350,
         y = {
-            general = 400
+            general = 450
         }
     },
     button = {
-        height = 19,
+        height = 26,
         width = {
             dialogue = 100,
             dialoguehalf = 44,
@@ -544,7 +543,6 @@ rarityList = {
     "Random"
 }
 
---, true, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoBackground
 
 registerForEvent("onDraw", function ()
     CPS.setThemeBegin()
@@ -554,17 +552,16 @@ registerForEvent("onDraw", function ()
     if ImGui.Begin("WeaponRoulette", true, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoBackground) then
         ImGui.SetWindowFontScale(1)
 
-        if initiatedMod == false then
+        if initiatedMod == false and showUI then
             if (ImGui.BeginTabBar("WeaponRoulette")) then
-                wWidth, wHeight = GetDisplayResolution()
-                if (ImGui.BeginTabItem("STATS")) then
+                CPS.setFrameThemeBegin()
+                if (ImGui.BeginTabItem("MAIN")) then
                     ImGui.Spacing()
-                    if (ImGui.Button("S T A R T", elements.button.width.single, elements.button.height)) then
+                    if (CPS.CPButton("S T A R T", elements.button.width.single, elements.button.height)) then
                         initiatedMod = true
                         Game.GetPlayer():SetWarningMessage("RANDOMIZED WEAPON PROTOCL INITIATED")
                     end
-                    ImGui.Separator()
-                    ImGui.ProgressBar(0, -1, 25)
+                    ImGui.ProgressBar(0, 335, 30)
                 ImGui.EndTabItem()
                 end
 
@@ -574,14 +571,27 @@ registerForEvent("onDraw", function ()
                         ImGui.PushItemWidth(-1)
                         tuningSettings = ImGui.SliderInt("Difficulty", tuningSettings, 1, 100)
                         if (ImGui.IsItemHovered()) then
-                            ImGui.SetTooltip("Lower values increase difficulty. Default 80")
+                            CPS.CPToolTip1Begin(280, 75)
+                            ImGui.Text("Weapon power multiplier as a percent.")
+                            ImGui.Spacing()
+                            ImGui.Text("Lower values spawn weaker weapons.")
+                            ImGui.Spacing()
+                            ImGui.Text("Default value: 80")
+                            CPS.CPToolTip1End()
                         end
                         ImGui.Separator()
                     end
                     if (ImGui.CollapsingHeader("T I M E R")) then
                         ImGui.Separator()
                         ImGui.PushItemWidth(150)
-                        intervalModifier = ImGui.InputInt("##Timer Assignment", intervalModifier, 5, 2400)
+                        intervalModifier = ImGui.InputInt("##Timer Assignment", intervalModifier, 5, 120)
+                        if (ImGui.IsItemHovered()) then
+                            CPS.CPToolTip1Begin(280, 50)
+                            ImGui.Text("Time between weapon changes in seconds")
+                            ImGui.Spacing()
+                            ImGui.Text("Default value: 10")
+                            CPS.CPToolTip1End()
+                        end
                         ImGui.SameLine()
                         ImGui.Text("SECONDS")
                         ImGui.Separator()
@@ -590,6 +600,13 @@ registerForEvent("onDraw", function ()
                         ImGui.Separator()
                         ImGui.PushItemWidth(150)
                         raritySelection = ImGui.Combo("##Rarity", raritySelection, rarityList, #rarityList)
+                        if (ImGui.IsItemHovered()) then
+                            CPS.CPToolTip1Begin(315, 50)
+                            ImGui.Text("Set a fixed rarity for weapons to spawn as.")
+                            ImGui.Spacing()
+                            ImGui.Text("Default value: Random")
+                            CPS.CPToolTip1End()
+                        end
                         ImGui.Separator()
                     end
                     if (ImGui.CollapsingHeader("C A T E G O R I E S")) then
@@ -621,7 +638,7 @@ registerForEvent("onDraw", function ()
                         ImGui.Separator()
                     end
                     ImGui.Separator()
-                    if (ImGui.Button("U P D A T E##Timer Change", -1, elements.button.height)) then
+                    if (CPS.CPButton("U P D A T E##Timer Change", -1, elements.button.height)) then
                         interval = intervalModifier
                         rarityModifier = raritySelection
                         tuningModifier = tuningSettings
@@ -635,23 +652,32 @@ registerForEvent("onDraw", function ()
                         fillWeaponList()
                         Game.GetPlayer():SetWarningMessage("SETTINGS UPDATED")
                     end
-                ImGui.EndTabItem()
+                    ImGui.EndTabItem()
                 end
+                CPS.setFrameThemeEnd()
             ImGui.EndTabBar()
             end
         end
         
         if initiatedMod == true then
-            if (ImGui.Button("R E S E T", elements.button.width.single, elements.button.height)) then
+            ImGui.Spacing()
+            ImGui.Spacing()
+            ImGui.Spacing()
+            ImGui.Spacing()
+            ImGui.Spacing()
+            ImGui.Spacing()
+            ImGui.Spacing()
+            CPS.setFrameThemeBegin()
+            if (CPS.CPButton("R E S E T", elements.button.width.single, elements.button.height)) then
                 initiatedMod = false
             end
-            ImGui.Separator()
             if startCombat == true then
-                ImGui.ProgressBar((interval - timeElapsed)/interval, -1, 25)
+                ImGui.ProgressBar((interval - timeElapsed)/interval, 335, 30)
             end
             if startCombat == false then
-                ImGui.ProgressBar(0, -1, 25)
+                ImGui.ProgressBar(0, 335, 30)
             end
+            CPS.setFrameThemeEnd()
         end
     ImGui.End()
     end
