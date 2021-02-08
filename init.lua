@@ -334,8 +334,13 @@ end)
 
 function removeWeap()
     local currentWeapon = espd:GetActiveWeapon()
+    print(currentWeapon.id.hash)
+    if currentWeapon.id.hash == 0 then
+        return false
+    end
     ts:RemoveItem(player, currentWeapon, 1)
     espd:ClearAllWeaponSlots()
+    return true
 end
 
 function giveWeap()
@@ -461,10 +466,9 @@ registerForEvent("onUpdate", function (timeDelta)
     end
 
     -- Removing weapon when the cycle is finished and still in combat
-    if initiatedMod == true and timeElapsed == 0 and removedWeapon == false and startCombat == true then
-        removeWeap()
+    if initiatedMod == true and timeElapsed <= 0 and removedWeapon == false and startCombat == true then
+        removedWeapon = removeWeap()
         startTime = os.time()
-        removedWeapon = true
     end
 
     -- Giving gun once the gun removing section tags the old weapon as nil and resetting the timer
