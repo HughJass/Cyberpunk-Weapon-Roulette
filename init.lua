@@ -300,7 +300,7 @@ registerForEvent("onInit", function ()
     playerLevel = 0
     previousWeap = 0
     currentIndex = 0
-    interval = 30
+    interval = 10
     intervalModifier = 0
     spawnedWeapon = false
     oldWeap = nil
@@ -337,16 +337,11 @@ registerForEvent("onInit", function ()
     rarityModifier = 5
     raritySelection = 1
 
-    
     firstGunSpawned = false
 
     tuningModifier = 80
     tuningSettings = 0
     fillWeaponList()
-
-    i = 1
-    test = 0
-
 end)
 
 function removeWeap()
