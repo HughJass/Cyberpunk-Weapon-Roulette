@@ -318,6 +318,7 @@ registerForEvent("onInit", function ()
 	checkedPower = 1
 	checkedSmart = 1
 	checkedTech = 1
+    checkedResetTimer = 1
 
     weaponsPower = true
     weaponsTech = true
@@ -335,14 +336,23 @@ registerForEvent("onInit", function ()
 
     rarityModifier = 5
     raritySelection = 1
-
+    weaponUpgraded = false
     startPauseTimer = false
     isPaused = false
     pauseTime = 0
     pauseOffset = 0
     firstGunSpawned = false
+    firstGunUpgraded = false
     indexTracker = 0
     duplicateGun = false
+    gaveSecondGun = false
+    frames = 0
+    startFrame = 0
+    endFrame = 0
+    resetTimer = true
+    resetChecked = true
+    combatOffset = 0
+    combatOffsetRecorded = false
 
     tuningModifier = 80
     tuningSettings = 0
@@ -373,14 +383,14 @@ function giveWeap()
     local w = gunList[r]
     indexTracker = r
     Game.EquipItemToHand(w)
-    print(w .. " // " .. tostring(r) .. " // " .. tostring(indexTracker))
 end
+
+
 
 function upgradeWeapon()
     espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
     local playerLValue = ss:GetStatValue(player:GetEntityID(), 'Level')
     local playerPLValue = ss:GetStatValue(player:GetEntityID(), 'PowerLevel')
-    print("god dammit")
     local slots = {
         Weapon = 3
     }
@@ -389,7 +399,6 @@ function upgradeWeapon()
         for i=1,v do
             local itemid = espd:GetItemInEquipSlot2(k, i - 1)
             if itemid.tdbid.hash ~= 0 then 
-                print("idcheck")
                 itemdata = ts:GetItemData(player, itemid)
                 local statObj = itemdata:GetStatsObjectID()
                 ss:RemoveAllModifiers(statObj, 'ItemLevel', true)
@@ -405,15 +414,17 @@ function upgradeWeapon()
                 ss:AddSavedModifier(statObj, statCritDamage)
                 ss:AddSavedModifier(statObj, statHeadshot)
                             
-        local rarity = rarityList[rarityModifier+1]
-        if rarityModifier == 5 then
-            local rnd = math.random(5)
-            rarity = rarityList[rnd]
-        end
-        Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
+                local rarity = rarityList[rarityModifier+1]
+                if rarityModifier == 5 then
+                    local rnd = math.random(5)
+                    rarity = rarityList[rnd]
+                end
+                Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
+                return true
             end
         end
     end
+    return false
 end
 
 function removeQuest()
@@ -437,7 +448,6 @@ function fillWeaponList()
             end
         end
     end
-    print(#gunList)
 end
 
 registerForEvent("onUpdate", function (timeDelta)
@@ -448,7 +458,9 @@ registerForEvent("onUpdate", function (timeDelta)
     startCombat = player:IsInCombat()
     isDead = player:IsDead()
     isPaused = GetSingleton('inkMenuScenario'):GetSystemRequestsHandler():IsGamePaused()
-
+    if initiatedMod == true then
+      frames = frames + 1
+    end
 
     if initiatedMod == true and isDead then
         initiatedMod = false
@@ -467,25 +479,32 @@ registerForEvent("onUpdate", function (timeDelta)
         firstGunSpawned = true
     end
 
-    if initiatedMod == true and firstGunSpawned == true and startMod == false then
+    if initiatedMod == true and firstGunSpawned == true and startMod == false and frames == 20 then
         if removeQuest() == true then
-            upgradeWeapon()
-            print("upgraded")
+            firstGunUpgraded = upgradeWeapon()
+            if firstGunUpgraded == true then
+                startMod = true
+                return
+            end
         end
-        startMod = true
-        print("hello")
+
+        if firstGunUpgraded == false then
+           frames = frames - 5
+        end
     end
+
+
 
     -- Stop the timer if leaving combat
     if initiatedMod == true and startCombat == false then
         startTimer = false
-    end
-
-    -- Entering combat setting / reseting the start time of the weapon spawning cycle
-    if initiatedMod == true and startCombat == true and startTimer == false then
-        startTime = os.time()
-        qa_tracker = os.time()
-        startTimer = true
+        if resetTimer == true then
+            combatOffset = 0
+        end
+        if resetTimer == false and combatOffsetRecorded == false then
+            combatOffset = timeElapsed
+            combatOffsetRecorded = true
+        end
     end
 
     -- Pause condition offset value
@@ -502,23 +521,34 @@ registerForEvent("onUpdate", function (timeDelta)
         startPauseTimer = false
     end
 
+
+
+    -- Entering combat setting / reseting the start time of the weapon spawning cycle
+    if initiatedMod == true and startCombat == true and startTimer == false then
+        startTime = os.time()
+        qa_tracker = os.time()
+        startTimer = true
+    end
+
     -- Updating a second timer to compare against the start time
     if initiatedMod == true and startCombat == true and startTimer == true then
         Time = os.time()
-        timeElapsed = interval - (Time - startTime) + pauseOffset
+        timeElapsed = interval - (Time - startTime) + pauseOffset - combatOffset
     end
 
     -- Removing weapon when the cycle is finished and still in combat
     if initiatedMod == true and timeElapsed <= 0 and removedWeapon == false and startCombat == true then
         removedWeapon = removeWeap()
         startTime = os.time()
+        startFrame = frames
         pauseOffset = 0
+        combatOffset = 0
+        combatOffsetRecorded = false
     end
 
     -- Giving gun once the gun removing section tags the old weapon as nil and resetting the timer
-    if initiatedMod == true and startCombat == true and removedWeapon == true then
+    if initiatedMod == true and startCombat == true and removedWeapon == true and (frames - startFrame) == 20 then
         giveWeap()
-        removeQuest()
         gaveWeapon = true
         removedWeapon = false
     end
@@ -526,15 +556,21 @@ registerForEvent("onUpdate", function (timeDelta)
     -- Giving weapon triggers gaveWeapon, signaling to upgrade active weapon
     if initiatedMod == true and startCombat == true and gaveWeapon == true then
         if removeQuest() == true then
-            upgradeWeapon()
-            Game.AddToInventory("Ammo.RifleAmmo",700);
-            Game.AddToInventory("Ammo.ShotgunAmmo",100);
-            Game.AddToInventory("Ammo.SniperRifleAmmo",100);
-            Game.AddToInventory("Ammo.HandgunAmmo",500);
-            gaveWeapon = false
+            weaponUpgraded = upgradeWeapon()
+            if weaponUpgraded == true then
+                Game.AddToInventory("Ammo.RifleAmmo",700);
+                Game.AddToInventory("Ammo.ShotgunAmmo",100);
+                Game.AddToInventory("Ammo.SniperRifleAmmo",100);
+                Game.AddToInventory("Ammo.HandgunAmmo",500);
+                gaveWeapon = false
+                return
+            end
+
+            if weaponUpgraded == false then
+                frames = frames - 5
+            end
 	    end
     end
-
 end)
 
 local elements = {
@@ -598,7 +634,7 @@ registerForEvent("onDraw", function ()
                 end
 
                 if (ImGui.BeginTabItem("SETTINGS")) then
-                    if (ImGui.CollapsingHeader("T U N I N G")) then
+                    if (ImGui.CollapsingHeader("W E A P O N  S T A T S")) then
                         ImGui.Separator()
                         ImGui.PushItemWidth(-1)
                         tuningSettings = ImGui.SliderInt("Difficulty", tuningSettings, 1, 100)
@@ -624,8 +660,18 @@ registerForEvent("onDraw", function ()
                             ImGui.Text("Default value: 10")
                             CPS.CPToolTip2End()
                         end
-                        ImGui.SameLine()
-                        ImGui.Text("SECONDS")
+                        ImGui.SameLine()            
+                        _, checkedResetTimer = ImGui.Checkbox("C O M B A T  R E S E T", resetChecked)
+                        if checkedResetTimer then
+                            resetChecked = not resetChecked
+                        end
+                        if (ImGui.IsItemHovered()) then
+                            CPS.CPToolTip2Begin(315, 50)
+                            ImGui.Text("Trigger a reset on the timer after combat.")
+                            ImGui.Spacing()
+                            ImGui.Text("Default value: Enabled")
+                            CPS.CPToolTip2End()
+                        end
                         ImGui.Separator()
                     end
                     if (ImGui.CollapsingHeader("R A R I T Y")) then
@@ -674,6 +720,7 @@ registerForEvent("onDraw", function ()
                         interval = intervalModifier
                         rarityModifier = raritySelection
                         tuningModifier = tuningSettings
+                        resetTimer = resetChecked
                         weaponsActivated = {
                             weaponsBlade,
                             weaponsBlunt,
@@ -710,8 +757,11 @@ registerForEvent("onDraw", function ()
                 ImGui.ProgressBar((interval - timeElapsed)/interval, 335, 30)
                 
             end
-            if startCombat == false then
+            if startCombat == false and resetTimer == true then
                 ImGui.ProgressBar(0, 335, 30)
+            end
+            if startCombat == false and resetTimer == false then
+                ImGui.ProgressBar(combatOffset/interval, 335, 30)
             end
             CPS.setFrameThemeEnd(1)
         end
@@ -723,4 +773,3 @@ end)
 registerForEvent("onShutdown", function()
     initiatedMod = false
 end)
-
