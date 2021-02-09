@@ -254,7 +254,6 @@ gunTypes = {
 	}
 }
 
-
 gunList = {}
 
 showUI = false
@@ -337,7 +336,13 @@ registerForEvent("onInit", function ()
     rarityModifier = 5
     raritySelection = 1
 
+    startPauseTimer = false
+    isPaused = false
+    pauseTime = 0
+    pauseOffset = 0
     firstGunSpawned = false
+    indexTracker = 0
+    duplicateGun = false
 
     tuningModifier = 80
     tuningSettings = 0
@@ -357,15 +362,25 @@ end
 function giveWeap()
     espd:ClearAllWeaponSlots()
     local r = math.random(#gunList)
+    if r == indexTracker then
+        if r == #gunList then
+            r = 1
+        elseif r < #gunList then
+            r = r + 1
+        end
+        duplicateGun = true
+    end
     local w = gunList[r]
+    indexTracker = r
     Game.EquipItemToHand(w)
+    print(w .. " // " .. tostring(r) .. " // " .. tostring(indexTracker))
 end
 
 function upgradeWeapon()
     espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
     local playerLValue = ss:GetStatValue(player:GetEntityID(), 'Level')
     local playerPLValue = ss:GetStatValue(player:GetEntityID(), 'PowerLevel')
-
+    print("god dammit")
     local slots = {
         Weapon = 3
     }
@@ -374,6 +389,7 @@ function upgradeWeapon()
         for i=1,v do
             local itemid = espd:GetItemInEquipSlot2(k, i - 1)
             if itemid.tdbid.hash ~= 0 then 
+                print("idcheck")
                 itemdata = ts:GetItemData(player, itemid)
                 local statObj = itemdata:GetStatsObjectID()
                 ss:RemoveAllModifiers(statObj, 'ItemLevel', true)
@@ -431,12 +447,15 @@ registerForEvent("onUpdate", function (timeDelta)
     getSystems()
     startCombat = player:IsInCombat()
     isDead = player:IsDead()
+    isPaused = GetSingleton('inkMenuScenario'):GetSystemRequestsHandler():IsGamePaused()
+
 
     if initiatedMod == true and isDead then
         initiatedMod = false
         startMod = false
         startTimer = false
         firstGunSpawned = false
+        startPauseTImer = false
     end
 
     if initiatedMod == true and firstGunSpawned == false then
@@ -448,10 +467,13 @@ registerForEvent("onUpdate", function (timeDelta)
         firstGunSpawned = true
     end
 
-    if initiatedMod == true and startMod == false then
-        upgradeWeapon()
-        removeQuest()
+    if initiatedMod == true and firstGunSpawned == true and startMod == false then
+        if removeQuest() == true then
+            upgradeWeapon()
+            print("upgraded")
+        end
         startMod = true
+        print("hello")
     end
 
     -- Stop the timer if leaving combat
@@ -466,22 +488,37 @@ registerForEvent("onUpdate", function (timeDelta)
         startTimer = true
     end
 
+    -- Pause condition offset value
+    if initiatedMod == true and startCombat == true and isPaused == true and startPauseTimer == false then
+        pauseTime = os.time()
+        startPauseTimer = true
+    end
+
+    if initiatedMod == true and startCombat == true and startPauseTimer == true then
+        pauseOffset = os.time() - pauseTime
+    end
+
+    if isPaused == false then
+        startPauseTimer = false
+    end
+
     -- Updating a second timer to compare against the start time
     if initiatedMod == true and startCombat == true and startTimer == true then
         Time = os.time()
-        timeElapsed = interval - (Time - startTime)
+        timeElapsed = interval - (Time - startTime) + pauseOffset
     end
 
     -- Removing weapon when the cycle is finished and still in combat
     if initiatedMod == true and timeElapsed <= 0 and removedWeapon == false and startCombat == true then
         removedWeapon = removeWeap()
         startTime = os.time()
+        pauseOffset = 0
     end
 
     -- Giving gun once the gun removing section tags the old weapon as nil and resetting the timer
     if initiatedMod == true and startCombat == true and removedWeapon == true then
-        -- oldWeap = activeWeap()
         giveWeap()
+        removeQuest()
         gaveWeapon = true
         removedWeapon = false
     end
@@ -495,7 +532,7 @@ registerForEvent("onUpdate", function (timeDelta)
             Game.AddToInventory("Ammo.SniperRifleAmmo",100);
             Game.AddToInventory("Ammo.HandgunAmmo",500);
             gaveWeapon = false
-	end
+	    end
     end
 
 end)
@@ -671,11 +708,12 @@ registerForEvent("onDraw", function ()
             end
             if startCombat == true then
                 ImGui.ProgressBar((interval - timeElapsed)/interval, 335, 30)
+                
             end
             if startCombat == false then
                 ImGui.ProgressBar(0, 335, 30)
             end
-            CPS.setFrameThemeEnd()
+            CPS.setFrameThemeEnd(1)
         end
     ImGui.End()
     end

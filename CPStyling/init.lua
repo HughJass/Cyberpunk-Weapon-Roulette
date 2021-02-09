@@ -143,7 +143,7 @@ function CPStyle.setThemeBegin()
 	CPStyle.colorBegin("TabUnfocusedActive"             , CPStyle.theme.TabUnfocusedActive)
 	-- CPStyle.colorBegin("PlotLines"                      , CPStyle.theme.PlotLines)
 	-- CPStyle.colorBegin("PlotLinesHovered"               , CPStyle.theme.PlotLinesHovered)
-	-- CPStyle.colorBegin("PlotHistogram"                  , CPStyle.theme.PlotHistogram)
+	CPStyle.colorBegin("PlotHistogram"                  , CPStyle.theme.PlotHistogram)
 	-- CPStyle.colorBegin("PlotHistogramHovered"           , CPStyle.theme.PlotHistogramHovered)
 	-- CPStyle.colorBegin("TableHeaderBg"                  , CPStyle.theme.TableHeaderBg)
 	-- CPStyle.colorBegin("TableBorderStrong"              , CPStyle.theme.TableBorderStrong)
@@ -162,7 +162,7 @@ end
 
 function CPStyle.setThemeEnd()
 	CPStyle.styleEnd(2)
-	CPStyle.colorEnd(43)
+	CPStyle.colorEnd(44)
 end
 
 function CPStyle.setFrameThemeBegin()
@@ -174,10 +174,11 @@ function CPStyle.setFrameThemeBegin()
 	CPStyle.colorBegin("Border"                         , CPStyle.theme.CPFrameBorder)
 	CPStyle.colorBegin("TextSelectedBg"                 , CPStyle.theme.CPTextSelectedBg)
 	CPStyle.styleBegin("FrameBorderSize"                , 1)
+	CPStyle.styleBegin("FrameRounding"                  , 5)
 end
 
 function CPStyle.setFrameThemeEnd()
-	CPStyle.styleEnd(1)
+	CPStyle.styleEnd(2)
 	CPStyle.colorEnd(7)
 end
 
