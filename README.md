@@ -30,3 +30,5 @@ Known issues:
   
 Feedback:  
 The biggest priority is to make the sequence from start to finish feel as smooth as possible. Feedback that can describe situations where this is not the case would be very helpful, along with general feedback about anything to make the use of this mod more exciting.
+
+CPStyling is under MIT license. https://github.com/Nats-ji/CPStyling.lua
