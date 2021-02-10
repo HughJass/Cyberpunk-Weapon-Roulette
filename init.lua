@@ -254,6 +254,27 @@ gunTypes = {
 	}
 }
 
+weaponTypes = {
+    'Wea_AssaultRifle',
+    'Wea_Hammer',
+    'Wea_Handgun',
+    'Wea_HeavyMachineGun',
+    'Wea_Katana',
+    'Wea_Knife',
+    'Wea_LightMachineGun',
+    'Wea_LongBlade',
+    'Wea_OneHandedClub',
+    'Wea_PrecisionRifle',
+    'Wea_Revolver',
+    'Wea_Rifle',
+    'Wea_ShortBlade',
+    'Wea_Shotgun',
+    'Wea_ShotgunDual',
+    'Wea_SniperRifle',
+    'Wea_SubmachineGun',
+    'Wea_TwoHandedClub'
+}
+
 gunList = {}
 
 showUI = false
@@ -318,6 +339,7 @@ registerForEvent("onInit", function ()
 	checkedPower = 1
 	checkedSmart = 1
 	checkedTech = 1
+    checkedOwn = 0
     checkedResetTimer = 1
 
     weaponsPower = true
@@ -325,6 +347,7 @@ registerForEvent("onInit", function ()
     weaponsSmart = true
     weaponsBlunt = true
     weaponsBlade = true
+    weaponsOwn = false
     weaponsActivated = {
     	weaponsBlade,
     	weaponsBlunt,
@@ -344,7 +367,6 @@ registerForEvent("onInit", function ()
     firstGunSpawned = false
     firstGunUpgraded = false
     indexTracker = 0
-    duplicateGun = false
     gaveSecondGun = false
     frames = 0
     startFrame = 0
@@ -360,13 +382,19 @@ registerForEvent("onInit", function ()
 end)
 
 function removeWeap()
-    local currentWeapon = espd:GetActiveWeapon()
-    if currentWeapon.id.hash == 0 then
-        return false
+    if weaponsOwn == false then
+        local currentWeapon = espd:GetActiveWeapon()
+        if currentWeapon.id.hash == 0 then
+            return false
+        end
+        ts:RemoveItem(player, currentWeapon, 1)
+        espd:ClearAllWeaponSlots()
+        return true
     end
-    ts:RemoveItem(player, currentWeapon, 1)
-    espd:ClearAllWeaponSlots()
-    return true
+    if weaponsOwn == true then
+        espd:ClearAllWeaponSlots()
+        return true
+    end
 end
 
 function giveWeap()
@@ -378,73 +406,101 @@ function giveWeap()
         elseif r < #gunList then
             r = r + 1
         end
-        duplicateGun = true
     end
     local w = gunList[r]
     indexTracker = r
-    Game.EquipItemToHand(w)
+    
+    if weaponsOwn == false then
+        Game.EquipItemToHand(w)
+    end
+
+    if weaponsOwn == true then
+        espd:EquipItem(w, false, false, true)
+    end
 end
 
-
-
 function upgradeWeapon()
-    espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
-    local playerLValue = ss:GetStatValue(player:GetEntityID(), 'Level')
-    local playerPLValue = ss:GetStatValue(player:GetEntityID(), 'PowerLevel')
-    local slots = {
-        Weapon = 3
-    }
-
-    for k,v in pairs(slots) do
-        for i=1,v do
-            local itemid = espd:GetItemInEquipSlot2(k, i - 1)
-            if itemid.tdbid.hash ~= 0 then 
-                itemdata = ts:GetItemData(player, itemid)
-                local statObj = itemdata:GetStatsObjectID()
-                ss:RemoveAllModifiers(statObj, 'ItemLevel', true)
-                ss:RemoveAllModifiers(statObj, 'CritChance', true)
-                ss:RemoveAllModifiers(statObj, 'CritDamage', true)
-                ss:RemoveAllModifiers(statObj, 'HeadshotDamageMultiplier', true)
-                local statPLevel = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('ItemLevel', 'Additive', playerPLValue * 10 * (tuningModifier / 100))
-                local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 35 * (playerLValue / 50) * (tuningModifier / 100))
-                local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 75 * (playerLValue / 50) * (tuningModifier / 100))
-                local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 1.5 * (playerLValue / 50) * (tuningModifier / 100))
-                ss:AddSavedModifier(statObj, statPLevel)
-                ss:AddSavedModifier(statObj, statCritChance)
-                ss:AddSavedModifier(statObj, statCritDamage)
-                ss:AddSavedModifier(statObj, statHeadshot)
-                            
-                local rarity = rarityList[rarityModifier+1]
-                if rarityModifier == 5 then
-                    local rnd = math.random(5)
-                    rarity = rarityList[rnd]
+    if weaponsOwn == false then
+        espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
+        local playerLValue = ss:GetStatValue(player:GetEntityID(), 'Level')
+        local playerPLValue = ss:GetStatValue(player:GetEntityID(), 'PowerLevel')
+        local slots = {
+            Weapon = 3
+        }
+        for k,v in pairs(slots) do
+            for i=1,v do
+                local itemid = espd:GetItemInEquipSlot2(k, i - 1)
+                if itemid.tdbid.hash ~= 0 then 
+                    itemdata = ts:GetItemData(player, itemid)
+                    local statObj = itemdata:GetStatsObjectID()
+                    ss:RemoveAllModifiers(statObj, 'ItemLevel', true)
+                    ss:RemoveAllModifiers(statObj, 'CritChance', true)
+                    ss:RemoveAllModifiers(statObj, 'CritDamage', true)
+                    ss:RemoveAllModifiers(statObj, 'HeadshotDamageMultiplier', true)
+                    local statPLevel = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('ItemLevel', 'Additive', playerPLValue * 10 * (tuningModifier / 100))
+                    local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 35 * (playerLValue / 50) * (tuningModifier / 100))
+                    local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 75 * (playerLValue / 50) * (tuningModifier / 100))
+                    local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 1.5 * (playerLValue / 50) * (tuningModifier / 100))
+                    ss:AddSavedModifier(statObj, statPLevel)
+                    ss:AddSavedModifier(statObj, statCritChance)
+                    ss:AddSavedModifier(statObj, statCritDamage)
+                    ss:AddSavedModifier(statObj, statHeadshot)
+                                
+                    local rarity = rarityList[rarityModifier+1]
+                    if rarityModifier == 5 then
+                        local rnd = math.random(5)
+                        rarity = rarityList[rnd]
+                    end
+                    Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
+                    return true
                 end
-                Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
-                return true
             end
         end
+        return false
     end
-    return false
+    if weaponsOwn == true then
+        return true
+    end
 end
 
 function removeQuest()
-    local currentWeapon = espd:GetActiveWeapon()
-    local itemdata = ts:GetItemData(player, currentWeapon)
-    if itemdata == nil then
-        return false
-    end
-    if itemdata:HasTag("Quest") then
-        itemdata:RemoveDynamicTag("Quest")
+    if weaponsOwn == false then
+        local currentWeapon = espd:GetActiveWeapon()
+        local itemdata = ts:GetItemData(player, currentWeapon)
+        if itemdata == nil then
+            return false
+        end
+        if itemdata:HasTag("Quest") then
+            itemdata:RemoveDynamicTag("Quest")
+        end
+        return true
     end
     return true
 end
 
 function fillWeaponList()
     gunList = {}
-    for i = 1, #weaponsActivated do
-        if weaponsActivated[i] then
-            for _, v in ipairs(gunTypes[i]) do
-                table.insert(gunList, v)
+    getSystems()
+    if weaponsOwn == false then
+        for i = 1, #weaponsActivated do
+            if weaponsActivated[i] then
+                for _, v in ipairs(gunTypes[i]) do
+                    table.insert(gunList, v)
+                end
+            end
+        end
+    end
+    if weaponsOwn == true then
+        res, inventoryItems = ts:GetItemList(player)
+        for _, inventory in pairs(inventoryItems) do
+            inventoryID = inventory:GetID()
+            local inventoryData = ts:GetItemData(player, inventory:GetID())
+            local inventoryItemType = inventoryData:GetItemType()
+            for _, v in pairs(weaponTypes) do
+                if (string.find(tostring(inventoryItemType), v)) and tostring(inventoryID.tdbid.hash) ~= '1187296526' then
+                    table.insert(gunList, inventoryID)
+                    print(v .. " // " .. tostring(inventoryID.tdbid.hash))
+                end
             end
         end
     end
@@ -471,12 +527,22 @@ registerForEvent("onUpdate", function (timeDelta)
     end
 
     if initiatedMod == true and firstGunSpawned == false then
-    	local firstGun = math.random(#gunList) 
+        firstGun = math.random(#gunList) 
         Game.UnequipItem('Weapon', '0')
         Game.UnequipItem('Weapon', '1')
         Game.UnequipItem('Weapon', '2')
-        Game.EquipItemToHand(gunList[firstGun])
-        firstGunSpawned = true
+        if weaponsOwn == false and frames == 10 then
+            Game.EquipItemToHand(gunList[firstGun])
+            firstGunSpawned = true
+            print(#gunList)
+            return
+        end
+        if weaponsOwn == true and frames == 10 then
+            espd:EquipItem(gunList[firstGun], false, false, true)
+            firstGunSpawned = true
+            print(#gunList)
+            return
+        end
     end
 
     if initiatedMod == true and firstGunSpawned == true and startMod == false and frames == 20 then
@@ -639,10 +705,12 @@ registerForEvent("onDraw", function ()
                         ImGui.PushItemWidth(-1)
                         tuningSettings = ImGui.SliderInt("Difficulty", tuningSettings, 1, 100)
                         if (ImGui.IsItemHovered()) then
-                            CPS.CPToolTip2Begin(280, 75)
+                            CPS.CPToolTip2Begin(280, 78)
                             ImGui.Text("Weapon power multiplier as a percent.")
                             ImGui.Spacing()
                             ImGui.Text("Lower values spawn weaker weapons.")
+                            ImGui.Spacing()
+                            ImGui.Separator()
                             ImGui.Spacing()
                             ImGui.Text("Default value: 80")
                             CPS.CPToolTip2End()
@@ -654,20 +722,26 @@ registerForEvent("onDraw", function ()
                         ImGui.PushItemWidth(150)
                         intervalModifier = ImGui.InputInt("##Timer Assignment", intervalModifier, 5, 120)
                         if (ImGui.IsItemHovered()) then
-                            CPS.CPToolTip2Begin(280, 50)
-                            ImGui.Text("Time between weapon changes in seconds")
+                            CPS.CPToolTip2Begin(293, 57)
+                            ImGui.Text("Time between weapon changes in seconds.")
+                            ImGui.Spacing()
+                            ImGui.Separator()
                             ImGui.Spacing()
                             ImGui.Text("Default value: 10")
                             CPS.CPToolTip2End()
                         end
                         ImGui.SameLine()            
-                        _, checkedResetTimer = ImGui.Checkbox("C O M B A T  R E S E T", resetChecked)
+                        _, checkedResetTimer = ImGui.Checkbox("RESET EVERY COMBAT", resetChecked)
                         if checkedResetTimer then
                             resetChecked = not resetChecked
                         end
                         if (ImGui.IsItemHovered()) then
-                            CPS.CPToolTip2Begin(315, 50)
-                            ImGui.Text("Trigger a reset on the timer after combat.")
+                            CPS.CPToolTip2Begin(315, 78)
+                            ImGui.Text("Trigger a reset on the progress timer at")
+                            ImGui.Spacing()
+                            ImGui.Text("the end of every combat.")
+                            ImGui.Spacing()
+                            ImGui.Separator()
                             ImGui.Spacing()
                             ImGui.Text("Default value: Enabled")
                             CPS.CPToolTip2End()
@@ -679,8 +753,10 @@ registerForEvent("onDraw", function ()
                         ImGui.PushItemWidth(150)
                         raritySelection = ImGui.Combo("##Rarity", raritySelection, rarityList, #rarityList)
                         if (ImGui.IsItemHovered()) then
-                            CPS.CPToolTip2Begin(315, 50)
+                            CPS.CPToolTip2Begin(324, 57)
                             ImGui.Text("Set a fixed rarity for weapons to spawn as.")
+                            ImGui.Spacing()
+                            ImGui.Separator()
                             ImGui.Spacing()
                             ImGui.Text("Default value: Random")
                             CPS.CPToolTip2End()
@@ -714,6 +790,23 @@ registerForEvent("onDraw", function ()
                             weaponsBlade = not weaponsBlade
                         end
                         ImGui.Separator()
+                        _, checkedOwn = ImGui.Checkbox("USE PERSONAL WEAPONS FROM INVENTORY", weaponsOwn)
+                        if checkedOwn then
+                            weaponsOwn = not weaponsOwn
+                        end
+                        if (ImGui.IsItemHovered()) then
+                            CPS.CPToolTip2Begin(450, 104)
+                            ImGui.Text("Option to use the weapons in your inventory at the time of")
+                            ImGui.Spacing()
+                            ImGui.Text("activation as the weapon pool. Equipment will not be changed")
+                            ImGui.Spacing()
+                            ImGui.Text("or deleted, but ammo will still be replenished.")
+                            ImGui.Spacing()
+                            ImGui.Separator()
+                            ImGui.Spacing()
+                            ImGui.Text("Default value: Disabled")
+                            CPS.CPToolTip2End()
+                        end
                     end
                     ImGui.Separator()
                     if (CPS.CPButton("U P D A T E##Timer Change", -1, elements.button.height)) then
