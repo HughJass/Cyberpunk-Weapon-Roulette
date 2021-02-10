@@ -422,37 +422,32 @@ function upgradeWeapon()
     espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
     local playerLValue = ss:GetStatValue(player:GetEntityID(), 'Level')
     local playerPLValue = ss:GetStatValue(player:GetEntityID(), 'PowerLevel')
-    local slots = {
-        Weapon = 3
-    }
     local upgradeOk = false
-    for k,v in pairs(slots) do
-        for i=1,v do
-            local itemid = espd:GetItemInEquipSlot2(k, i - 1)
-            if itemid.tdbid.hash ~= 0 then 
-                local itemdata = ts:GetItemData(player, itemid)
-                local statObj = itemdata:GetStatsObjectID()
-                ss:RemoveAllModifiers(statObj, 'ItemLevel', true)
-                ss:RemoveAllModifiers(statObj, 'CritChance', true)
-                ss:RemoveAllModifiers(statObj, 'CritDamage', true)
-                ss:RemoveAllModifiers(statObj, 'HeadshotDamageMultiplier', true)
-                local statPLevel = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('ItemLevel', 'Additive', playerPLValue * 10 * (tuningModifier / 100))
-                local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 35 * (playerLValue / 50) * (tuningModifier / 100))
-                local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 75 * (playerLValue / 50) * (tuningModifier / 100))
-                local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 1.5 * (playerLValue / 50) * (tuningModifier / 100))
-                ss:AddSavedModifier(statObj, statPLevel)
-                ss:AddSavedModifier(statObj, statCritChance)
-                ss:AddSavedModifier(statObj, statCritDamage)
-                ss:AddSavedModifier(statObj, statHeadshot)
-                            
-                local rarity = rarityList[rarityModifier+1]
-                if rarityModifier == 5 then
-                    local rnd = math.random(5)
-                    rarity = rarityList[rnd]
-                end
-                Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
-                upgradeOk = true
+    for i=1,3 do
+        local itemid = espd:GetItemInEquipSlot2("Weapon", i - 1)
+        if itemid.tdbid.hash ~= 0 then 
+            local itemdata = ts:GetItemData(player, itemid)
+            local statObj = itemdata:GetStatsObjectID()
+            ss:RemoveAllModifiers(statObj, 'ItemLevel', true)
+            ss:RemoveAllModifiers(statObj, 'CritChance', true)
+            ss:RemoveAllModifiers(statObj, 'CritDamage', true)
+            ss:RemoveAllModifiers(statObj, 'HeadshotDamageMultiplier', true)
+            local statPLevel = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('ItemLevel', 'Additive', playerPLValue * 10 * (tuningModifier / 100))
+            local statCritChance = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritChance', 'Additive', 35 * (playerLValue / 50) * (tuningModifier / 100))
+            local statCritDamage = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('CritDamage', 'Additive', 75 * (playerLValue / 50) * (tuningModifier / 100))
+            local statHeadshot = Game['gameRPGManager::CreateStatModifier;gamedataStatTypegameStatModifierTypeFloat']('HeadshotDamageMultiplier', 'Additive', 1.5 * (playerLValue / 50) * (tuningModifier / 100))
+            ss:AddSavedModifier(statObj, statPLevel)
+            ss:AddSavedModifier(statObj, statCritChance)
+            ss:AddSavedModifier(statObj, statCritDamage)
+            ss:AddSavedModifier(statObj, statHeadshot)
+                        
+            local rarity = rarityList[rarityModifier+1]
+            if rarityModifier == 5 then
+                local rnd = math.random(5)
+                rarity = rarityList[rnd]
             end
+            Game['gameRPGManager::ForceItemQuality;GameObjectgameItemDataCName'](player, itemdata, CName.new(rarity))
+            upgradeOk = true
         end
     end
     return upgradeOk
