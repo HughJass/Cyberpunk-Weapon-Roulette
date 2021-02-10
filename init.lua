@@ -528,6 +528,8 @@ registerForEvent("onUpdate", function (timeDelta)
         startTimer = false
         firstGunSpawned = false
         startPauseTImer = false
+        weaponsCleared = false
+        firstGunUpgraded = false
     end
 
     if initiatedMod == true and weaponsCleared == false then
@@ -861,6 +863,9 @@ registerForEvent("onDraw", function ()
                 startMod = false
                 startTimer = false
                 firstGunSpawned = false
+                startPauseTImer = false
+                weaponsCleared = false
+                firstGunUpgraded = false
             end
             if startCombat == true then
                 ImGui.ProgressBar((interval - timeElapsed)/interval, 335, 30)
