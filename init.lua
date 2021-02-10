@@ -321,7 +321,7 @@ registerForEvent("onInit", function ()
     previousWeap = 0
     currentIndex = 0
     interval = 10
-    intervalModifier = 0
+    intervalModifier = 10
     spawnedWeapon = false
     oldWeap = nil
     initiatedMod = false
@@ -358,7 +358,7 @@ registerForEvent("onInit", function ()
     listCreated = false
 
     rarityModifier = 5
-    raritySelection = 1
+    raritySelection = 5
     weaponUpgraded = false
     startPauseTimer = false
     isPaused = false
@@ -375,10 +375,14 @@ registerForEvent("onInit", function ()
     resetChecked = true
     combatOffset = 0
     combatOffsetRecorded = false
+    firstGun = 1
+    weaponsCleared = false
 
     tuningModifier = 80
-    tuningSettings = 0
+    tuningSettings = 80
     fillWeaponList()
+
+    testIndex = 1
 end)
 
 function removeWeap()
@@ -499,7 +503,7 @@ function fillWeaponList()
             for _, v in pairs(weaponTypes) do
                 if (string.find(tostring(inventoryItemType), v)) and tostring(inventoryID.tdbid.hash) ~= '1187296526' then
                     table.insert(gunList, inventoryID)
-                    print(v .. " // " .. tostring(inventoryID.tdbid.hash))
+                    -- print(v .. " // " .. tostring(inventoryID.tdbid.hash))
                 end
             end
         end
@@ -526,26 +530,30 @@ registerForEvent("onUpdate", function (timeDelta)
         startPauseTImer = false
     end
 
-    if initiatedMod == true and firstGunSpawned == false then
+    if initiatedMod == true and weaponsCleared == false then
         firstGun = math.random(#gunList) 
         Game.UnequipItem('Weapon', '0')
         Game.UnequipItem('Weapon', '1')
         Game.UnequipItem('Weapon', '2')
-        if weaponsOwn == false and frames == 10 then
+        espd:ClearAllWeaponSlots()
+        weaponsCleared = true
+    end
+
+    if initiatedMod == true and weaponsCleared == true and frames == 25 and firstGunSpawned == false then
+        if weaponsOwn == false then
             Game.EquipItemToHand(gunList[firstGun])
             firstGunSpawned = true
-            print(#gunList)
             return
         end
-        if weaponsOwn == true and frames == 10 then
+        if weaponsOwn == true then
             espd:EquipItem(gunList[firstGun], false, false, true)
             firstGunSpawned = true
-            print(#gunList)
+            -- print(#gunList)
             return
         end
     end
 
-    if initiatedMod == true and firstGunSpawned == true and startMod == false and frames == 20 then
+    if initiatedMod == true and firstGunSpawned == true and startMod == false and frames == 50 then
         if removeQuest() == true then
             firstGunUpgraded = upgradeWeapon()
             if firstGunUpgraded == true then
@@ -628,6 +636,14 @@ registerForEvent("onUpdate", function (timeDelta)
                 Game.AddToInventory("Ammo.ShotgunAmmo",100);
                 Game.AddToInventory("Ammo.SniperRifleAmmo",100);
                 Game.AddToInventory("Ammo.HandgunAmmo",500);
+        
+                local currentCheck = espd:GetActiveWeapon()    
+                local currentData = ts:GetItemData(player, currentCheck)
+                local currentID = currentData:GetID()
+                local currentStatObj = itemdata:GetStatsObjectID()
+                -- local a1 = ss:GetStatValue(currentStatObj, 'ItemLevel')
+                -- print(testIndex .. " // " .. tostring(currentID.tdbid.hash) .. " // " .. tostring(a1))
+                -- testIndex = testIndex + 1
                 gaveWeapon = false
                 return
             end
